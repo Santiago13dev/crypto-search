@@ -1,103 +1,134 @@
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+import CoinCard from './components/CoinCard';
+import { searchCoins } from './lib/coingecko';
+import { Coin } from './types/coin';
+import { toast } from 'react-hot-toast';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [results, setResults] = useState<Coin[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState('');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleSearch = async (query: string) => {
+    if (!query.trim()) return;
+
+    setIsLoading(true);
+    setResults([]);
+
+    try {
+      const data = await searchCoins(query);
+      if (data && Array.isArray(data.coins)) {
+        setResults(data.coins);
+      } else {
+        console.error('Formato de datos inesperado:', data);
+        toast.error('Error en el formato de datos');
+      }
+    } catch (err) {
+      console.error('Error fetching data:', err);
+      toast.error('Error al buscar criptomonedas. Por favor, intenta de nuevo.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+      <div className="fixed inset-0 opacity-20">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div key={i} className="absolute w-full h-px bg-[#00ff00]" style={{ top: `${i * 5}%` }}></div>
+        ))}
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div key={i} className="absolute h-full w-px bg-[#00ff00]" style={{ left: `${i * 5}%` }}></div>
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="text-center mb-12"
+        >
+          <div className="relative mb-8">
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-[#00ff00] text-2xl md:text-3xl">{">"}</span>
+              <span className="text-[#00ff00] text-2xl md:text-3xl">{"-"}</span>
+              <h1 className="text-4xl md:text-6xl font-bold text-[#00ff00] font-mono tracking-wider">CRYPTO SEARCH</h1>
+            </div>
+            <p className="text-[#00ff00]/90 text-lg md:text-xl mb-2 mt-4 font-mono">{"> Advanced cryptocurrency indexing system"}</p>
+            <p className="text-[#00ff00]/60 text-sm font-mono">Real-time blockchain data at your fingertips</p>
+          </div>
+
+          <div className="max-w-2xl mx-auto p-6">
+            <form
+  onSubmit={(e) => {
+    e.preventDefault();
+    handleSearch(query);
+  }}
+  className="w-full font-mono"
+>
+  <div className="flex w-full max-w-2xl mx-auto">
+    <input
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="e.g. bitcoin, ethereum, solana..."
+      className="flex-1 bg-[#0a0f1e] border border-[#00ff00] text-[#00ff00] placeholder-[#00ff00]/50 px-4 py-2 focus:outline-none rounded-l-md"
+    />
+    <button
+      type="submit"
+      className="bg-[#00ff00] text-black px-6 py-2 font-bold rounded-r-md hover:brightness-125 transition"
+    >
+      Buscar
+    </button>
+  </div>
+</form>
+          </div>
+        </motion.div>
+
+        <div className="mt-16">
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center">
+              <div className="relative">
+                <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent"></div>
+                <div className="absolute inset-0 animate-pulse rounded-full h-16 w-16 bg-white/20"></div>
+              </div>
+              <p className="mt-6 text-white/60 text-lg font-mono">{`>`} searching cryptocurrency data...</p>
+            </div>
+          ) : results.length > 0 ? (
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {results.map((coin, index) => (
+                <motion.div
+                  key={coin.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <CoinCard coin={coin} />
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12"
+            >
+              <p className="text-white/60 text-lg font-mono">
+                {`>`} Enter a cryptocurrency name to start searching...
+              </p>
+            </motion.div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }
