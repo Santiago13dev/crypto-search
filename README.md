@@ -15,7 +15,8 @@
 **Crypto Search** es una aplicación web de **búsqueda indexada de criptomonedas** desarrollada con **Next.js** y desplegada en **Vercel**. Consulta monedas como *bitcoin*, *ethereum*, *solana*, etc., con resultados en tiempo real gracias a la integración con la API de CoinGecko.
 
 > 🟢 [Visita la app en producción](https://crypto-search.vercel.app)
-
+> ---
+https://crypto-search-nine.vercel.app/
 ---
 
 ## 🎯 Características
