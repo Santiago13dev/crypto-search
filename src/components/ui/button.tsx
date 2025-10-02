@@ -1,28 +1,35 @@
-import { ButtonHTMLAttributes, forwardRef } from "react"
-import { cn } from "@/lib/utils"
+import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { clsx } from 'clsx';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "outline"
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
     return (
       <button
-        className={cn(
-          "inline-flex items-center justify-center rounded-none px-4 py-2 text-sm font-mono transition-colors",
-          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00ff00]/50",
-          "disabled:pointer-events-none disabled:opacity-50",
-          variant === "default" && "bg-[#00ff00] text-black font-medium hover:bg-[#00ff00]/90",
-          variant === "outline" && "border border-[#00ff00]/20 text-[#00ff00] hover:bg-[#00ff00]/10",
+        ref={ref}
+        className={clsx(
+          'font-mono font-bold transition-all rounded-none disabled:opacity-50 disabled:cursor-not-allowed',
+          {
+            'bg-[#00ff00] text-black hover:brightness-125': variant === 'primary',
+            'bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00] hover:bg-[#00ff00]/10': variant === 'secondary',
+            'bg-transparent text-[#00ff00] hover:bg-[#00ff00]/10': variant === 'ghost',
+            'bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500/30': variant === 'danger',
+            'px-3 py-2 text-sm': size === 'sm',
+            'px-4 py-3 text-base': size === 'md',
+            'px-6 py-4 text-lg': size === 'lg',
+          },
           className
         )}
-        ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-Button.displayName = "Button"
+);
 
-export { Button }
+Button.displayName = 'Button';
+
+export default Button;
