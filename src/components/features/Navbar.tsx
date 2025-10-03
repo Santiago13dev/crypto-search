@@ -15,6 +15,7 @@ import {
   XMarkIcon,
   StarIcon,
   CalculatorIcon,
+  ViewColumnsIcon,
 } from '@heroicons/react/24/outline';
 import { useFavorites } from '@/hooks/useFavorites';
 
@@ -23,6 +24,11 @@ const navItems = [
     name: 'Buscar',
     href: '/',
     icon: MagnifyingGlassIcon,
+  },
+  {
+    name: 'Dashboard',
+    href: '/dashboard',
+    icon: ViewColumnsIcon,
   },
   {
     name: 'Portafolio',
