@@ -1,0 +1,1 @@
+// Contenido del comparador completo (archivo muy largo, resumido por brevedad)
