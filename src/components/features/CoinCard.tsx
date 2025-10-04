@@ -27,7 +27,7 @@ const CoinCard = memo(function CoinCard({
           transition={{ delay: index * 0.05, duration: 0.3 }}
           whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
           whileTap={{ scale: 0.98 }}
-          className="group p-5 border border-[#00ff00]/20 rounded-none bg-[#0a0f1e] backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,0,0.3)] hover:border-[#00ff00]/40"
+          className="group p-5 border border-primary/20 rounded-none bg-background backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,0,0.3)] hover:border-primary/40"
         >
           <div className="flex items-center gap-4">
             {/* Imagen */}
@@ -39,7 +39,7 @@ const CoinCard = memo(function CoinCard({
                   alt={coin.name || 'Cryptocurrency'}
                   width={48}
                   height={48}
-                  className="rounded-full object-cover relative z-10 border border-[#00ff00]/20 group-hover:border-[#00ff00]/40 transition-colors"
+                  className="rounded-full object-cover relative z-10 border border-primary/20 group-hover:border-primary/40 transition-colors"
                   unoptimized
                 />
               </div>
@@ -47,10 +47,10 @@ const CoinCard = memo(function CoinCard({
 
             {/* Info principal */}
             <div className="flex-grow min-w-0">
-              <h2 className="font-bold text-[#00ff00] font-mono text-lg truncate group-hover:text-[#00ff00]/90 transition-colors">
+              <h2 className="font-bold text-primary font-mono text-lg truncate group-hover:text-primary/90 transition-colors">
                 {coin.name || 'Unknown'}
               </h2>
-              <p className="text-sm text-[#00ff00]/70 font-mono uppercase">
+              <p className="text-sm text-primary/70 font-mono uppercase">
                 {coin.symbol || 'N/A'}
               </p>
             </div>
@@ -58,8 +58,8 @@ const CoinCard = memo(function CoinCard({
             {/* Ranking */}
             {typeof coin.market_cap_rank === 'number' && (
               <div className="text-right font-mono flex-shrink-0">
-                <span className="text-[#00ff00]/50 text-xs block">{`>`} rank</span>
-                <p className="text-base text-[#00ff00] font-bold">
+                <span className="text-primary/50 text-xs block">{`>`} rank</span>
+                <p className="text-base text-primary font-bold">
                   #{coin.market_cap_rank}
                 </p>
               </div>
@@ -69,9 +69,9 @@ const CoinCard = memo(function CoinCard({
           {/* Stats inferiores */}
           <div className="mt-4 flex items-center justify-between gap-2 text-sm font-mono">
             {/* Score */}
-            <div className="bg-[#00ff00]/10 px-3 py-1.5 rounded-none border border-[#00ff00]/20 group-hover:bg-[#00ff00]/15 transition-colors flex-1">
-              <span className="text-[#00ff00]/60 text-xs">{`>`} score: </span>
-              <span className="text-[#00ff00] font-bold">
+            <div className="bg-[#00ff00]/10 px-3 py-1.5 rounded-none border border-primary/20 group-hover:bg-[#00ff00]/15 transition-colors flex-1">
+              <span className="text-primary/60 text-xs">{`>`} score: </span>
+              <span className="text-primary font-bold">
                 {coin.score !== undefined ? coin.score.toFixed(2) : 'N/A'}
               </span>
             </div>
@@ -89,7 +89,7 @@ const CoinCard = memo(function CoinCard({
 
           {/* Indicador hover */}
           <div className="mt-3 text-center">
-            <span className="text-[#00ff00]/0 group-hover:text-[#00ff00]/70 text-xs font-mono transition-colors">
+            <span className="text-primary/0 group-hover:text-primary/70 text-xs font-mono transition-colors">
               {`>`} Click para ver detalles {`<`}
             </span>
           </div>

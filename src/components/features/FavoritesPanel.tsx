@@ -1,4 +1,8 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { XMarkIcon, TrashIcon, StarIcon } from '@heroicons/react/24/outline';
 import { FavoriteCoin } from '@/hooks/useFavorites';
 import Image from 'next/image';
@@ -19,6 +23,15 @@ export default function FavoritesPanel({
   onRemove,
   onClearAll,
 }: FavoritesPanelProps) {
+  const [mounted, setMounted] = useState(false);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -38,47 +51,49 @@ export default function FavoritesPanel({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 h-full w-full sm:w-96 bg-[#0a0f1e] border-l border-[#00ff00]/20 z-50 overflow-hidden flex flex-col"
+            className="fixed right-0 top-0 h-full w-full sm:w-96 bg-background border-l border-primary/20 z-50 overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="p-4 border-b border-[#00ff00]/20">
+            <div className="p-4 border-b border-primary/20">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <StarIcon className="w-6 h-6 text-[#00ff00]" />
-                  <h2 className="text-xl font-bold text-[#00ff00] font-mono">
-                    FAVORITOS
+                  <StarIcon className="w-6 h-6 text-primary" />
+                  <h2 className="text-xl font-bold text-primary font-mono">
+                    {t('favorites.title').toUpperCase()}
                   </h2>
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-[#00ff00]/10 rounded-none transition-colors"
-                  aria-label="Cerrar panel"
+                  className="p-1 text-primary hover:bg-primary/10 transition-colors"
                 >
-                  <XMarkIcon className="w-6 h-6 text-[#00ff00]" />
+                  <XMarkIcon className="w-6 h-6" />
                 </button>
               </div>
-              <p className="text-sm text-[#00ff00]/60 font-mono">
-                {`>`} {favorites.length} {favorites.length === 1 ? 'moneda' : 'monedas'} guardada
-                {favorites.length !== 1 ? 's' : ''}
-              </p>
+
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-primary/60 font-mono">
+                  {t('favorites.count', { count: favorites.length })}
+                </p>
+                {favorites.length > 0 && (
+                  <button
+                    onClick={onClearAll}
+                    className="text-xs text-error hover:text-error/80 font-mono transition-colors"
+                  >
+                    {t('favorites.clearAll')}
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Contenido */}
+            {/* Content */}
             <div className="flex-1 overflow-y-auto p-4">
               {favorites.length === 0 ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-12"
-                >
-                  <StarIcon className="w-16 h-16 text-[#00ff00]/20 mx-auto mb-4" />
-                  <p className="text-[#00ff00]/60 font-mono mb-2">
-                    No hay favoritos aún
+                <div className="text-center py-20 px-4">
+                  <StarIcon className="w-16 h-16 text-primary/20 mx-auto mb-4" />
+                  <p className="text-primary/60 font-mono">
+                    {t('favorites.empty')}
                   </p>
-                  <p className="text-[#00ff00]/40 text-sm font-mono">
-                    Agrega monedas a favoritos para verlas aquí
-                  </p>
-                </motion.div>
+                </div>
               ) : (
                 <div className="space-y-3">
                   {favorites.map((coin, index) => (
@@ -88,70 +103,47 @@ export default function FavoritesPanel({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ delay: index * 0.05 }}
-                      className="group"
+                      className="group relative p-3 border border-primary/20 hover:border-primary/40 transition-colors bg-background-secondary"
                     >
-                      <Link
-                        href={`/coin/${coin.id}`}
-                        onClick={onClose}
-                        className="block p-3 border border-[#00ff00]/20 bg-[#0a0f1e] hover:bg-[#00ff00]/5 rounded-none transition-all"
-                      >
+                      <Link href={`/coin/${coin.id}`} className="block">
                         <div className="flex items-center gap-3">
                           {/* Imagen */}
-                          {coin.image && (
-                            <div className="relative w-10 h-10 flex-shrink-0">
-                              <Image
-                                src={coin.image}
-                                alt={coin.name}
-                                width={40}
-                                height={40}
-                                className="rounded-full border border-[#00ff00]/20"
-                                unoptimized
-                              />
-                            </div>
-                          )}
-
-                          {/* Info */}
-                          <div className="flex-grow min-w-0">
-                            <h3 className="font-bold text-[#00ff00] font-mono text-sm truncate">
-                              {coin.name}
-                            </h3>
-                            <p className="text-xs text-[#00ff00]/60 font-mono uppercase">
-                              {coin.symbol}
-                            </p>
+                          <div className="relative w-10 h-10 flex-shrink-0">
+                            <Image
+                              src={coin.image}
+                              alt={coin.name}
+                              fill
+                              className="object-contain"
+                            />
                           </div>
 
-                          {/* Botón eliminar */}
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              onRemove(coin.id);
-                            }}
-                            className="p-2 opacity-0 group-hover:opacity-100 hover:bg-red-500/20 rounded-none transition-all"
-                            aria-label={`Eliminar ${coin.name} de favoritos`}
-                          >
-                            <TrashIcon className="w-4 h-4 text-red-400" />
-                          </button>
+                          {/* Info */}
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-sm font-bold text-primary font-mono truncate">
+                              {coin.name}
+                            </h3>
+                            <p className="text-xs text-primary/60 font-mono">
+                              {coin.symbol.toUpperCase()}
+                            </p>
+                          </div>
                         </div>
                       </Link>
+
+                      {/* Botón eliminar */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onRemove(coin.id);
+                        }}
+                        className="absolute top-2 right-2 p-1 text-primary/40 hover:text-error hover:bg-error/10 transition-colors opacity-0 group-hover:opacity-100"
+                      >
+                        <TrashIcon className="w-4 h-4" />
+                      </button>
                     </motion.div>
                   ))}
                 </div>
               )}
             </div>
-
-            {/* Footer */}
-            {favorites.length > 0 && (
-              <div className="p-4 border-t border-[#00ff00]/20">
-                <button
-                  onClick={onClearAll}
-                  className="w-full px-4 py-3 bg-red-500/20 border border-red-500/40 text-red-400 font-mono font-bold rounded-none hover:bg-red-500/30 transition-all"
-                >
-                  <TrashIcon className="w-5 h-5 inline mr-2" />
-                  ELIMINAR TODOS
-                </button>
-              </div>
-            )}
           </motion.div>
         </>
       )}

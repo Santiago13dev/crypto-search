@@ -159,7 +159,7 @@ export default function ChartsPage() {
         return coin.market_cap;
       case 'volume':
         return coin.total_volume;
-=======
+
   const getMetricValue = (coin: TopCoin) => {
     switch (selectedMetric) {
       case 'price': return coin.current_price;
@@ -178,10 +178,14 @@ export default function ChartsPage() {
 
   if (loading) {
     return (
+ feature/theme-integration
+      <main className="min-h-screen bg-background flex items-center justify-center">
+
       <main className="min-h-screen bg-[#0a0f1e] flex items-center justify-center">
  feature/widgets-personalizables
+ main
         <Loading message="Loading market data..." />
-=======
+
         <Loading message="Cargando datos de mercado..." />
  main
       </main>
@@ -189,8 +193,12 @@ export default function ChartsPage() {
   }
 
   return (
+ feature/theme-integration
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
+
     <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
  feature/widgets-personalizables
+ main
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -217,19 +225,19 @@ export default function ChartsPage() {
           className="mb-8"
         >
           <div className="flex items-center gap-3 mb-6">
-            <ChartBarIcon className="w-10 h-10 text-[#00ff00]" />
+            <ChartBarIcon className="w-10 h-10 text-primary" />
             <div>
-              <h1 className="text-4xl font-bold font-mono text-[#00ff00]">
+              <h1 className="text-4xl font-bold font-mono text-primary">
                 {`>`} GRÁFICAS DE MERCADO
               </h1>
-              <p className="text-[#00ff00]/60 font-mono mt-1">
+              <p className="text-primary/60 font-mono mt-1">
                 Visualiza y compara criptomonedas
               </p>
             </div>
           </div>
 
           {/* Search Bar */}
-=======
+
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
           <div key={`h-${i}`} className="absolute w-full h-px bg-[#00ff00]" style={{ top: `${i * 5}%` }} />
@@ -251,14 +259,18 @@ export default function ChartsPage() {
           <div className="mb-6 relative">
             <div className="flex gap-2 max-w-2xl">
               <div className="relative flex-1">
+ feature/theme-integration
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
+
                 <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00ff00]/50" />
  feature/widgets-personalizables
+ main
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   placeholder="Buscar criptomoneda para agregar..."
-                  className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] placeholder-[#00ff00]/50 px-4 py-3 pl-12 pr-10 focus:outline-none focus:border-[#00ff00] rounded-none font-mono"
+                  className="w-full bg-background border border-primary/40 text-primary placeholder-[#00ff00]/50 px-4 py-3 pl-12 pr-10 focus:outline-none focus:border-primary rounded-none font-mono"
                 />
                 {searchQuery && (
                   <button
@@ -268,7 +280,7 @@ export default function ChartsPage() {
                       setShowSearchResults(false);
                       setFilteredCoins(topCoins.slice(0, 20));
                     }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#00ff00]/50 hover:text-[#00ff00]"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/50 hover:text-primary"
                   >
 =======
                 <input type="text" value={searchQuery} onChange={(e) => handleSearch(e.target.value)} placeholder="Buscar criptomoneda..." className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] placeholder-[#00ff00]/50 px-4 py-3 pl-12 pr-10 focus:outline-none focus:border-[#00ff00] rounded-none font-mono" />
@@ -282,7 +294,7 @@ export default function ChartsPage() {
  feature/widgets-personalizables
               <button
                 onClick={() => setFilteredCoins(topCoins.slice(0, 20))}
-                className="px-4 py-3 bg-[#00ff00]/10 border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/20 transition-all rounded-none whitespace-nowrap"
+                className="px-4 py-3 bg-[#00ff00]/10 border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/20 transition-all rounded-none whitespace-nowrap"
               >
                 Reset Top 20
               </button>
@@ -293,14 +305,14 @@ export default function ChartsPage() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute top-full left-0 right-0 mt-2 max-w-2xl bg-[#0a0f1e] border border-[#00ff00]/40 rounded-none max-h-96 overflow-y-auto z-50"
+                className="absolute top-full left-0 right-0 mt-2 max-w-2xl bg-background border border-primary/40 rounded-none max-h-96 overflow-y-auto z-50"
               >
                 {isSearching ? (
-                  <div className="p-4 text-center text-[#00ff00]/60 font-mono">
+                  <div className="p-4 text-center text-primary/60 font-mono">
                     Buscando...
                   </div>
                 ) : searchResults.length === 0 ? (
-                  <div className="p-4 text-center text-[#00ff00]/60 font-mono">
+                  <div className="p-4 text-center text-primary/60 font-mono">
                     No se encontraron resultados
                   </div>
                 ) : (
@@ -322,15 +334,15 @@ export default function ChartsPage() {
                           />
                         )}
                         <div className="flex-1">
-                          <p className="text-[#00ff00] font-mono font-bold">
+                          <p className="text-primary font-mono font-bold">
                             {coin.name}
                           </p>
-                          <p className="text-[#00ff00]/60 font-mono text-sm uppercase">
+                          <p className="text-primary/60 font-mono text-sm uppercase">
                             {coin.symbol}
                           </p>
                         </div>
                         {coin.market_cap_rank && (
-                          <span className="text-[#00ff00]/50 font-mono text-sm">
+                          <span className="text-primary/50 font-mono text-sm">
                             #{coin.market_cap_rank}
                           </span>
                         )}
@@ -355,7 +367,7 @@ export default function ChartsPage() {
                 className={`px-4 py-2 font-mono text-sm transition-all rounded-none ${
                   selectedMetric === metric.key
                     ? 'bg-[#00ff00] text-black font-bold'
-                    : 'bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00] hover:bg-[#00ff00]/10'
+                    : 'bg-background border border-primary/20 text-primary hover:bg-[#00ff00]/10'
                 }`}
               >
                 {metric.label}
@@ -364,7 +376,7 @@ export default function ChartsPage() {
           </div>
 
           {/* Info */}
-          <p className="text-[#00ff00]/50 font-mono text-sm mt-4">
+          <p className="text-primary/50 font-mono text-sm mt-4">
             {`>`} Mostrando {filteredCoins.length} {filteredCoins.length === 1 ? 'criptomoneda' : 'criptomonedas'}
           </p>
         </motion.div>
@@ -378,7 +390,7 @@ export default function ChartsPage() {
         >
           {filteredCoins.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-[#00ff00]/60 font-mono">
+              <p className="text-primary/60 font-mono">
                 No hay monedas para mostrar. Usa el buscador para agregar.
               </p>
             </div>
@@ -414,12 +426,12 @@ export default function ChartsPage() {
                 >
                   <Link
                     href={`/coin/${coin.id}`}
-                    className="block p-4 border border-[#00ff00]/20 bg-[#0a0f1e] hover:border-[#00ff00]/40 transition-all rounded-none"
+                    className="block p-4 border border-primary/20 bg-background hover:border-primary/40 transition-all rounded-none"
                   >
                     <div className="flex items-center gap-4 mb-3">
                       {/* Rank */}
                       <div className="w-8 text-center">
-                        <span className="text-[#00ff00]/50 font-mono font-bold">
+                        <span className="text-primary/50 font-mono font-bold">
                           #{coin.market_cap_rank || index + 1}
                         </span>
                       </div>
@@ -439,10 +451,10 @@ export default function ChartsPage() {
                       {/* Name */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <h3 className="text-lg font-bold text-[#00ff00] font-mono truncate">
+                          <h3 className="text-lg font-bold text-primary font-mono truncate">
                             {coin.name}
                           </h3>
-                          <span className="text-sm text-[#00ff00]/60 font-mono uppercase">
+                          <span className="text-sm text-primary/60 font-mono uppercase">
                             {coin.symbol}
                           </span>
                         </div>
@@ -450,7 +462,7 @@ export default function ChartsPage() {
 
                       {/* Value */}
                       <div className="text-right">
-                        <p className="text-lg font-bold text-[#00ff00] font-mono">
+                        <p className="text-lg font-bold text-primary font-mono">
                           {selectedMetric === 'price' 
                             ? `$${value.toLocaleString()}`
                             : formatNumber(value)
@@ -526,29 +538,29 @@ export default function ChartsPage() {
             transition={{ delay: 0.8 }}
             className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4"
           >
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none text-center">
-              <p className="text-xs text-[#00ff00]/50 font-mono mb-2">
+            <div className="p-4 border border-primary/20 bg-background rounded-none text-center">
+              <p className="text-xs text-primary/50 font-mono mb-2">
                 Market Cap Total
               </p>
-              <p className="text-2xl font-bold text-[#00ff00] font-mono">
+              <p className="text-2xl font-bold text-primary font-mono">
                 {formatNumber(filteredCoins.reduce((sum, coin) => sum + coin.market_cap, 0))}
               </p>
             </div>
 
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none text-center">
-              <p className="text-xs text-[#00ff00]/50 font-mono mb-2">
+            <div className="p-4 border border-primary/20 bg-background rounded-none text-center">
+              <p className="text-xs text-primary/50 font-mono mb-2">
                 Volumen 24h Total
               </p>
-              <p className="text-2xl font-bold text-[#00ff00] font-mono">
+              <p className="text-2xl font-bold text-primary font-mono">
                 {formatNumber(filteredCoins.reduce((sum, coin) => sum + coin.total_volume, 0))}
               </p>
             </div>
 
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none text-center">
-              <p className="text-xs text-[#00ff00]/50 font-mono mb-2">
+            <div className="p-4 border border-primary/20 bg-background rounded-none text-center">
+              <p className="text-xs text-primary/50 font-mono mb-2">
                 Criptomonedas Mostradas
               </p>
-              <p className="text-2xl font-bold text-[#00ff00] font-mono">
+              <p className="text-2xl font-bold text-primary font-mono">
                 {filteredCoins.length}
               </p>
             </div>

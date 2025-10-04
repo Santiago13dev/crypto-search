@@ -76,19 +76,19 @@ export default function AddWidgetModal({ isOpen, onClose, onAdd }: AddWidgetModa
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
-            <div className="bg-[#0a0f1e] border-2 border-[#00ff00] rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+            <div className="bg-background border-2 border-primary rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
               {/* Header */}
-              <div className="px-6 py-4 border-b border-[#00ff00]/30 bg-[#00ff00]/5">
+              <div className="px-6 py-4 border-b border-primary/30 bg-[#00ff00]/5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <PlusIcon className="w-6 h-6 text-[#00ff00]" />
-                    <h2 className="text-xl font-mono font-bold text-[#00ff00]">
+                    <PlusIcon className="w-6 h-6 text-primary" />
+                    <h2 className="text-xl font-mono font-bold text-primary">
                       {`>`} Agregar Widget
                     </h2>
                   </div>
                   <button
                     onClick={onClose}
-                    className="text-[#00ff00] hover:text-[#00ff00]/70 transition-colors font-mono text-2xl"
+                    className="text-primary hover:text-primary/70 transition-colors font-mono text-2xl"
                   >
                     ×
                   </button>
@@ -106,17 +106,17 @@ export default function AddWidgetModal({ isOpen, onClose, onAdd }: AddWidgetModa
                         onClick={() => handleAdd(option.type)}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="p-4 bg-[#00ff00]/5 border border-[#00ff00]/30 rounded-lg hover:border-[#00ff00] hover:bg-[#00ff00]/10 transition-all text-left group"
+                        className="p-4 bg-[#00ff00]/5 border border-primary/30 rounded-lg hover:border-primary hover:bg-[#00ff00]/10 transition-all text-left group"
                       >
                         <div className="flex items-start gap-3">
-                          <div className="p-2 bg-[#00ff00]/10 rounded border border-[#00ff00]/30 group-hover:bg-[#00ff00]/20 transition-colors">
-                            <Icon className="w-6 h-6 text-[#00ff00]" />
+                          <div className="p-2 bg-[#00ff00]/10 rounded border border-primary/30 group-hover:bg-[#00ff00]/20 transition-colors">
+                            <Icon className="w-6 h-6 text-primary" />
                           </div>
                           <div className="flex-1">
-                            <h3 className="font-mono font-bold text-[#00ff00] mb-1">
+                            <h3 className="font-mono font-bold text-primary mb-1">
                               {option.title}
                             </h3>
-                            <p className="text-sm text-[#00ff00]/60 font-mono">
+                            <p className="text-sm text-primary/60 font-mono">
                               {option.description}
                             </p>
                           </div>
@@ -126,9 +126,9 @@ export default function AddWidgetModal({ isOpen, onClose, onAdd }: AddWidgetModa
                   })}
                 </div>
 
-                <div className="mt-6 p-4 bg-[#00ff00]/5 border border-[#00ff00]/30 rounded">
-                  <p className="text-xs text-[#00ff00]/60 font-mono">
-                    💡 <span className="text-[#00ff00]">Tip:</span> Arrastra y suelta los widgets para reorganizarlos. 
+                <div className="mt-6 p-4 bg-[#00ff00]/5 border border-primary/30 rounded">
+                  <p className="text-xs text-primary/60 font-mono">
+                    💡 <span className="text-primary">Tip:</span> Arrastra y suelta los widgets para reorganizarlos. 
                     Redimensiónalos para ajustar el tamaño.
                   </p>
                 </div>

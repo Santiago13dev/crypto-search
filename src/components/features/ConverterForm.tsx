@@ -74,31 +74,31 @@ export default function ConverterForm() {
   };
 
   return (
-    <div className="p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
+    <div className="p-6 border border-primary/20 bg-background rounded-none">
       <form onSubmit={handleConvert} className="space-y-6">
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Cantidad</label>
-          <input type="number" step="any" value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none" required />
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Cantidad</label>
+          <input type="number" step="any" value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none" required />
         </div>
 
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Desde</label>
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Desde</label>
           {fromCoin ? (
-            <div className="flex items-center gap-3 p-3 border border-[#00ff00]/20 rounded-none">
+            <div className="flex items-center gap-3 p-3 border border-primary/20 rounded-none">
               {fromCoin.thumb && <Image src={fromCoin.thumb} alt={fromCoin.name} width={24} height={24} className="rounded-full" unoptimized />}
-              <span className="font-mono text-[#00ff00]">{fromCoin.name}</span>
-              <button type="button" onClick={() => setFromCoin(null)} className="ml-auto text-[#00ff00]/60 hover:text-[#00ff00] text-sm font-mono underline">Cambiar</button>
+              <span className="font-mono text-primary">{fromCoin.name}</span>
+              <button type="button" onClick={() => setFromCoin(null)} className="ml-auto text-primary/60 hover:text-primary text-sm font-mono underline">Cambiar</button>
             </div>
           ) : (
             <div className="relative">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00ff00]/50" />
-              <input type="text" value={fromQuery} onChange={(e) => { setFromQuery(e.target.value); searchCoins(e.target.value, true); }} placeholder="Buscar..." className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 pl-12 font-mono focus:outline-none rounded-none" />
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
+              <input type="text" value={fromQuery} onChange={(e) => { setFromQuery(e.target.value); searchCoins(e.target.value, true); }} placeholder="Buscar..." className="w-full bg-background border border-primary/40 text-primary px-4 py-3 pl-12 font-mono focus:outline-none rounded-none" />
               {fromQuery && fromResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-[#0a0f1e] border border-[#00ff00]/40 rounded-none max-h-60 overflow-y-auto z-50">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-primary/40 rounded-none max-h-60 overflow-y-auto z-50">
                   {fromResults.slice(0, 5).map((coin) => (
                     <button key={coin.id} type="button" onClick={() => { setFromCoin(coin); setFromQuery(''); setFromResults([]); }} className="w-full p-3 hover:bg-[#00ff00]/10 flex items-center gap-3 text-left">
                       {coin.thumb && <Image src={coin.thumb} alt={coin.name} width={24} height={24} className="rounded-full" unoptimized />}
-                      <span className="font-mono text-[#00ff00]">{coin.name}</span>
+                      <span className="font-mono text-primary">{coin.name}</span>
                     </button>
                   ))}
                 </div>
@@ -108,29 +108,29 @@ export default function ConverterForm() {
         </div>
 
         <div className="flex justify-center">
-          <button type="button" onClick={swapCoins} className="p-3 bg-[#00ff00]/10 border border-[#00ff00]/20 text-[#00ff00] hover:bg-[#00ff00]/20 transition-all rounded-none">
+          <button type="button" onClick={swapCoins} className="p-3 bg-[#00ff00]/10 border border-primary/20 text-primary hover:bg-[#00ff00]/20 transition-all rounded-none">
             <ArrowsUpDownIcon className="w-6 h-6" />
           </button>
         </div>
 
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Hasta</label>
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Hasta</label>
           {toCoin ? (
-            <div className="flex items-center gap-3 p-3 border border-[#00ff00]/20 rounded-none">
+            <div className="flex items-center gap-3 p-3 border border-primary/20 rounded-none">
               {toCoin.thumb && <Image src={toCoin.thumb} alt={toCoin.name} width={24} height={24} className="rounded-full" unoptimized />}
-              <span className="font-mono text-[#00ff00]">{toCoin.name}</span>
-              <button type="button" onClick={() => setToCoin(null)} className="ml-auto text-[#00ff00]/60 hover:text-[#00ff00] text-sm font-mono underline">Cambiar</button>
+              <span className="font-mono text-primary">{toCoin.name}</span>
+              <button type="button" onClick={() => setToCoin(null)} className="ml-auto text-primary/60 hover:text-primary text-sm font-mono underline">Cambiar</button>
             </div>
           ) : (
             <div className="relative">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00ff00]/50" />
-              <input type="text" value={toQuery} onChange={(e) => { setToQuery(e.target.value); searchCoins(e.target.value, false); }} placeholder="Buscar..." className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 pl-12 font-mono focus:outline-none rounded-none" />
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
+              <input type="text" value={toQuery} onChange={(e) => { setToQuery(e.target.value); searchCoins(e.target.value, false); }} placeholder="Buscar..." className="w-full bg-background border border-primary/40 text-primary px-4 py-3 pl-12 font-mono focus:outline-none rounded-none" />
               {toQuery && toResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-[#0a0f1e] border border-[#00ff00]/40 rounded-none max-h-60 overflow-y-auto z-50">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-primary/40 rounded-none max-h-60 overflow-y-auto z-50">
                   {toResults.slice(0, 5).map((coin) => (
                     <button key={coin.id} type="button" onClick={() => { setToCoin(coin); setToQuery(''); setToResults([]); }} className="w-full p-3 hover:bg-[#00ff00]/10 flex items-center gap-3 text-left">
                       {coin.thumb && <Image src={coin.thumb} alt={coin.name} width={24} height={24} className="rounded-full" unoptimized />}
-                      <span className="font-mono text-[#00ff00]">{coin.name}</span>
+                      <span className="font-mono text-primary">{coin.name}</span>
                     </button>
                   ))}
                 </div>
@@ -140,8 +140,8 @@ export default function ConverterForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Comisión (%)</label>
-          <input type="number" step="0.01" value={fee} onChange={(e) => setFee(e.target.value)} className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none" />
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Comisión (%)</label>
+          <input type="number" step="0.01" value={fee} onChange={(e) => setFee(e.target.value)} className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none" />
         </div>
 
         <button type="submit" disabled={loading || !fromCoin || !toCoin} className="w-full px-4 py-3 bg-[#00ff00] text-black font-bold font-mono hover:brightness-125 transition-all rounded-none disabled:opacity-50">
@@ -149,10 +149,10 @@ export default function ConverterForm() {
         </button>
 
         {result !== null && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 border-2 border-[#00ff00] bg-[#00ff00]/10 rounded-none">
-            <p className="text-xs text-[#00ff00]/60 font-mono mb-2">Resultado</p>
-            <p className="text-4xl font-bold text-[#00ff00] font-mono mb-2">{result.toFixed(8)}</p>
-            <p className="text-sm text-[#00ff00]/80 font-mono">{toCoin?.symbol.toUpperCase()}</p>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 border-2 border-primary bg-[#00ff00]/10 rounded-none">
+            <p className="text-xs text-primary/60 font-mono mb-2">Resultado</p>
+            <p className="text-4xl font-bold text-primary font-mono mb-2">{result.toFixed(8)}</p>
+            <p className="text-sm text-primary/80 font-mono">{toCoin?.symbol.toUpperCase()}</p>
           </motion.div>
         )}
       </form>

@@ -126,7 +126,7 @@ export default function AlertsPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -154,12 +154,12 @@ export default function AlertsPage() {
         >
           <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
             <div className="flex items-center gap-3">
-              <BellAlertIcon className="w-10 h-10 text-[#00ff00]" />
+              <BellAlertIcon className="w-10 h-10 text-primary" />
               <div>
-                <h1 className="text-4xl font-bold font-mono text-[#00ff00]">
+                <h1 className="text-4xl font-bold font-mono text-primary">
                   {`>`} ALERTAS DE PRECIOS
                 </h1>
-                <p className="text-[#00ff00]/60 font-mono mt-1">
+                <p className="text-primary/60 font-mono mt-1">
                   Recibe notificaciones cuando el precio cambie
                 </p>
               </div>
@@ -188,12 +188,12 @@ export default function AlertsPage() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
+            <div className="p-4 border border-primary/20 bg-background rounded-none">
               <div className="flex items-center gap-2 mb-2">
-                <ClockIcon className="w-5 h-5 text-[#00ff00]" />
-                <p className="text-xs text-[#00ff00]/60 font-mono">Activas</p>
+                <ClockIcon className="w-5 h-5 text-primary" />
+                <p className="text-xs text-primary/60 font-mono">Activas</p>
               </div>
-              <p className="text-3xl font-bold text-[#00ff00] font-mono">
+              <p className="text-3xl font-bold text-primary font-mono">
                 {activeAlerts.length}
               </p>
             </div>
@@ -228,7 +228,7 @@ export default function AlertsPage() {
             {/* Active Alerts */}
             {activeAlerts.length > 0 && (
               <div className="mb-8">
-                <h2 className="text-2xl font-bold font-mono text-[#00ff00] mb-4">
+                <h2 className="text-2xl font-bold font-mono text-primary mb-4">
                   {`>`} Alertas Activas
                 </h2>
                 <div className="space-y-3">
@@ -241,7 +241,7 @@ export default function AlertsPage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] hover:border-[#00ff00]/40 transition-all rounded-none"
+                        className="p-4 border border-primary/20 bg-background hover:border-primary/40 transition-all rounded-none"
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex items-center gap-3 flex-1">
@@ -257,15 +257,15 @@ export default function AlertsPage() {
                             )}
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-bold text-[#00ff00] font-mono">
+                                <h3 className="font-bold text-primary font-mono">
                                   {alert.coinName}
                                 </h3>
-                                <span className="text-sm text-[#00ff00]/60 font-mono uppercase">
+                                <span className="text-sm text-primary/60 font-mono uppercase">
                                   {alert.coinSymbol}
                                 </span>
                               </div>
                               <div className="flex items-center gap-2 text-sm">
-                                <span className="font-mono text-[#00ff00]/80">
+                                <span className="font-mono text-primary/80">
                                   {getConditionIcon(alert)} {getConditionText(alert)}
                                 </span>
                                 {currentPrice && (
@@ -275,11 +275,11 @@ export default function AlertsPage() {
                                 )}
                               </div>
                               {alert.note && (
-                                <p className="text-xs text-[#00ff00]/50 font-mono mt-1">
+                                <p className="text-xs text-primary/50 font-mono mt-1">
                                   📝 {alert.note}
                                 </p>
                               )}
-                              <p className="text-xs text-[#00ff00]/40 font-mono mt-1">
+                              <p className="text-xs text-primary/40 font-mono mt-1">
                                 Creada: {formatDate(alert.createdAt)}
                               </p>
                             </div>
@@ -308,7 +308,7 @@ export default function AlertsPage() {
                   </h2>
                   <button
                     onClick={clearTriggered}
-                    className="text-sm font-mono text-[#00ff00]/60 hover:text-[#00ff00] underline"
+                    className="text-sm font-mono text-primary/60 hover:text-primary underline"
                   >
                     Limpiar activadas
                   </button>
@@ -388,7 +388,7 @@ export default function AlertsPage() {
               <BellAlertIcon className="w-5 h-5" />
               Crear tu primera alerta
             </button>
-            <p className="text-[#00ff00]/60 font-mono text-sm">
+            <p className="text-primary/60 font-mono text-sm">
               Las alertas te notificarán cuando el precio alcance tu objetivo
             </p>
           </motion.div>

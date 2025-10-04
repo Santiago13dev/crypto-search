@@ -4,8 +4,65 @@
 
 @import "@fontsource/fira-code";
 
+/* CSS Variables para temas - valores por defecto (Matrix) */
+:root {
+  --color-primary: #00ff00;
+  --color-primary-dark: #00cc00;
+  --color-primary-light: #33ff33;
+  
+  --color-background: #0a0f1e;
+  --color-background-secondary: #0d1420;
+  --color-background-tertiary: #111827;
+  
+  --color-text: #00ff00;
+  --color-text-secondary: rgba(0, 255, 0, 0.8);
+  --color-text-tertiary: rgba(0, 255, 0, 0.6);
+  
+  --color-accent: #00ffff;
+  --color-accent-secondary: #ff00ff;
+  
+  --color-success: #00ff00;
+  --color-error: #ff0033;
+  --color-warning: #ffaa00;
+  --color-info: #00ffff;
+  
+  --color-border: rgba(0, 255, 0, 0.3);
+  --color-border-light: rgba(0, 255, 0, 0.2);
+  --color-border-dark: rgba(0, 255, 0, 0.5);
+}
+
 body {
-  @apply bg-black text-white font-mono;
+  @apply font-mono;
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes globales con !important para sobrescribir Tailwind */
+@layer utilities {
+  .text-theme-primary {
+    color: var(--color-primary) !important;
+  }
+  
+  .bg-theme-primary {
+    background-color: var(--color-primary) !important;
+  }
+  
+  .bg-theme-background {
+    background-color: var(--color-background) !important;
+  }
+  
+  .bg-theme-background-secondary {
+    background-color: var(--color-background-secondary) !important;
+  }
+  
+  .border-theme-primary {
+    border-color: var(--color-primary) !important;
+  }
+  
+  .border-theme {
+    border-color: var(--color-border) !important;
+  }
 }
 
 /* React Grid Layout Styles */
@@ -44,9 +101,9 @@ body {
 }
 
 .react-grid-item.react-grid-placeholder {
-  background: rgba(0, 255, 0, 0.1);
-  border: 2px dashed #00ff00;
-  opacity: 0.5;
+  background: var(--color-primary);
+  opacity: 0.1;
+  border: 2px dashed var(--color-primary);
   transition-duration: 100ms;
   z-index: 2;
   border-radius: 8px;
@@ -65,8 +122,9 @@ body {
   bottom: 3px;
   width: 8px;
   height: 8px;
-  border-right: 2px solid rgba(0, 255, 0, 0.5);
-  border-bottom: 2px solid rgba(0, 255, 0, 0.5);
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  opacity: 0.5;
 }
 
 .react-resizable-hide > .react-resizable-handle {
@@ -136,7 +194,7 @@ body {
 
 /* Hover effect */
 .react-grid-item > .react-resizable-handle:hover::after {
-  border-color: #00ff00;
+  opacity: 1;
 }
 
 /* Scrollbar terminal style */
@@ -146,14 +204,15 @@ body {
 }
 
 .scrollbar-terminal::-webkit-scrollbar-track {
-  background: rgba(0, 255, 0, 0.05);
+  background: var(--color-background-secondary);
 }
 
 .scrollbar-terminal::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 0, 0.3);
+  background: var(--color-primary);
+  opacity: 0.3;
   border-radius: 4px;
 }
 
 .scrollbar-terminal::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 0, 0.5);
+  opacity: 0.5;
 }

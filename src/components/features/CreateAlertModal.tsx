@@ -92,18 +92,18 @@ export default function CreateAlertModal({
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-[#0a0f1e] border-2 border-[#00ff00]/40 rounded-none max-w-lg w-full p-6"
+              className="bg-background border-2 border-primary/40 rounded-none max-w-lg w-full p-6"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <BellAlertIcon className="w-7 h-7 text-[#00ff00]" />
+                  <BellAlertIcon className="w-7 h-7 text-primary" />
                   <div>
-                    <h2 className="text-xl font-bold text-[#00ff00] font-mono">
+                    <h2 className="text-xl font-bold text-primary font-mono">
                       Crear Alerta
                     </h2>
-                    <p className="text-sm text-[#00ff00]/60 font-mono">
+                    <p className="text-sm text-primary/60 font-mono">
                       {coinName} ({coinSymbol.toUpperCase()})
                     </p>
                   </div>
@@ -112,12 +112,12 @@ export default function CreateAlertModal({
                   onClick={onClose}
                   className="p-2 hover:bg-[#00ff00]/10 transition-colors rounded-none"
                 >
-                  <XMarkIcon className="w-6 h-6 text-[#00ff00]" />
+                  <XMarkIcon className="w-6 h-6 text-primary" />
                 </button>
               </div>
 
               {/* Coin Info */}
-              <div className="p-4 border border-[#00ff00]/20 bg-[#00ff00]/5 rounded-none mb-6 flex items-center justify-between">
+              <div className="p-4 border border-primary/20 bg-[#00ff00]/5 rounded-none mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {coinImage && (
                     <Image
@@ -130,10 +130,10 @@ export default function CreateAlertModal({
                     />
                   )}
                   <div>
-                    <p className="text-sm text-[#00ff00]/60 font-mono">
+                    <p className="text-sm text-primary/60 font-mono">
                       Precio Actual
                     </p>
-                    <p className="text-2xl font-bold text-[#00ff00] font-mono">
+                    <p className="text-2xl font-bold text-primary font-mono">
                       ${currentPrice.toLocaleString()}
                     </p>
                   </div>
@@ -143,7 +143,7 @@ export default function CreateAlertModal({
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Condition Type */}
                 <div>
-                  <label className="block text-sm text-[#00ff00]/80 font-mono mb-3">
+                  <label className="block text-sm text-primary/80 font-mono mb-3">
                     {`>`} Tipo de Alerta
                   </label>
                   <div className="grid grid-cols-2 gap-3">
@@ -152,8 +152,8 @@ export default function CreateAlertModal({
                       onClick={() => setCondition('above')}
                       className={`p-3 border rounded-none font-mono text-sm transition-all ${
                         condition === 'above'
-                          ? 'bg-[#00ff00] text-black border-[#00ff00] font-bold'
-                          : 'bg-[#0a0f1e] text-[#00ff00] border-[#00ff00]/20 hover:border-[#00ff00]/40'
+                          ? 'bg-[#00ff00] text-black border-primary font-bold'
+                          : 'bg-background text-primary border-primary/20 hover:border-primary/40'
                       }`}
                     >
                       ⬆️ Mayor que
@@ -163,8 +163,8 @@ export default function CreateAlertModal({
                       onClick={() => setCondition('below')}
                       className={`p-3 border rounded-none font-mono text-sm transition-all ${
                         condition === 'below'
-                          ? 'bg-[#00ff00] text-black border-[#00ff00] font-bold'
-                          : 'bg-[#0a0f1e] text-[#00ff00] border-[#00ff00]/20 hover:border-[#00ff00]/40'
+                          ? 'bg-[#00ff00] text-black border-primary font-bold'
+                          : 'bg-background text-primary border-primary/20 hover:border-primary/40'
                       }`}
                     >
                       ⬇️ Menor que
@@ -175,7 +175,7 @@ export default function CreateAlertModal({
                       className={`p-3 border rounded-none font-mono text-sm transition-all ${
                         condition === 'change_up'
                           ? 'bg-emerald-400 text-black border-emerald-400 font-bold'
-                          : 'bg-[#0a0f1e] text-emerald-400 border-emerald-400/20 hover:border-emerald-400/40'
+                          : 'bg-background text-emerald-400 border-emerald-400/20 hover:border-emerald-400/40'
                       }`}
                     >
                       📈 Sube %
@@ -186,7 +186,7 @@ export default function CreateAlertModal({
                       className={`p-3 border rounded-none font-mono text-sm transition-all ${
                         condition === 'change_down'
                           ? 'bg-red-400 text-black border-red-400 font-bold'
-                          : 'bg-[#0a0f1e] text-red-400 border-red-400/20 hover:border-red-400/40'
+                          : 'bg-background text-red-400 border-red-400/20 hover:border-red-400/40'
                       }`}
                     >
                       📉 Baja %
@@ -197,7 +197,7 @@ export default function CreateAlertModal({
                 {/* Target Value */}
                 {isPriceCondition ? (
                   <div>
-                    <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                    <label className="block text-sm text-primary/80 font-mono mb-2">
                       {`>`} Precio Objetivo (USD)
                     </label>
                     <input
@@ -206,12 +206,12 @@ export default function CreateAlertModal({
                       value={targetPrice}
                       onChange={(e) => setTargetPrice(e.target.value)}
                       required
-                      className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono text-xl focus:outline-none focus:border-[#00ff00] rounded-none"
+                      className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono text-xl focus:outline-none focus:border-primary rounded-none"
                     />
                   </div>
                 ) : (
                   <div>
-                    <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                    <label className="block text-sm text-primary/80 font-mono mb-2">
                       {`>`} Cambio Porcentual (%)
                     </label>
                     <input
@@ -220,14 +220,14 @@ export default function CreateAlertModal({
                       value={targetPercentage}
                       onChange={(e) => setTargetPercentage(e.target.value)}
                       required
-                      className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono text-xl focus:outline-none focus:border-[#00ff00] rounded-none"
+                      className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono text-xl focus:outline-none focus:border-primary rounded-none"
                     />
                   </div>
                 )}
 
                 {/* Mini Chart */}
-                <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
-                  <p className="text-xs text-[#00ff00]/60 font-mono mb-3">
+                <div className="p-4 border border-primary/20 bg-background rounded-none">
+                  <p className="text-xs text-primary/60 font-mono mb-3">
                     Visualización
                   </p>
                   <div className="relative h-32 bg-[#00ff00]/5 rounded-none">
@@ -236,7 +236,7 @@ export default function CreateAlertModal({
                       className="absolute left-0 right-0 border-t-2 border-blue-400 border-dashed"
                       style={{ bottom: `${currentPricePosition}%` }}
                     >
-                      <span className="absolute -top-6 left-2 text-xs font-mono text-blue-400 bg-[#0a0f1e] px-2 py-1">
+                      <span className="absolute -top-6 left-2 text-xs font-mono text-blue-400 bg-background px-2 py-1">
                         Actual: ${currentPrice.toFixed(2)}
                       </span>
                     </div>
@@ -244,10 +244,10 @@ export default function CreateAlertModal({
                     {/* Target Price Line */}
                     {isPriceCondition && !isNaN(targetValue) && (
                       <div
-                        className="absolute left-0 right-0 border-t-2 border-[#00ff00]"
+                        className="absolute left-0 right-0 border-t-2 border-primary"
                         style={{ bottom: `${targetPricePosition}%` }}
                       >
-                        <span className="absolute -bottom-6 right-2 text-xs font-mono text-[#00ff00] bg-[#0a0f1e] px-2 py-1">
+                        <span className="absolute -bottom-6 right-2 text-xs font-mono text-primary bg-background px-2 py-1">
                           Objetivo: ${targetValue.toFixed(2)}
                         </span>
                         {condition === 'above' && targetValue > currentPrice && (
@@ -263,10 +263,10 @@ export default function CreateAlertModal({
                     {!isPriceCondition && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
-                          <p className="text-3xl font-bold font-mono text-[#00ff00]">
+                          <p className="text-3xl font-bold font-mono text-primary">
                             {condition === 'change_up' ? '+' : '-'}{percentageValue}%
                           </p>
-                          <p className="text-xs font-mono text-[#00ff00]/60 mt-1">
+                          <p className="text-xs font-mono text-primary/60 mt-1">
                             desde ${currentPrice.toFixed(2)}
                           </p>
                         </div>
@@ -277,7 +277,7 @@ export default function CreateAlertModal({
 
                 {/* Note */}
                 <div>
-                  <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                  <label className="block text-sm text-primary/80 font-mono mb-2">
                     {`>`} Nota (Opcional)
                   </label>
                   <input
@@ -285,7 +285,7 @@ export default function CreateAlertModal({
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     placeholder="Ej: Vender cuando llegue aquí"
-                    className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] placeholder-[#00ff00]/30 px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none"
+                    className="w-full bg-background border border-primary/40 text-primary placeholder-[#00ff00]/30 px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ export default function CreateAlertModal({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="flex-1 px-4 py-3 bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
+                    className="flex-1 px-4 py-3 bg-background border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
                   >
                     Cancelar
                   </button>

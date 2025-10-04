@@ -79,7 +79,7 @@ export default function PortfolioPage() {
   }, 0);
 
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -107,12 +107,12 @@ export default function PortfolioPage() {
         >
           <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
             <div className="flex items-center gap-3">
-              <BriefcaseIcon className="w-10 h-10 text-[#00ff00]" />
+              <BriefcaseIcon className="w-10 h-10 text-primary" />
               <div>
-                <h1 className="text-4xl font-bold font-mono text-[#00ff00]">
+                <h1 className="text-4xl font-bold font-mono text-primary">
                   {`>`} MI PORTAFOLIO
                 </h1>
-                <p className="text-[#00ff00]/60 font-mono mt-1">
+                <p className="text-primary/60 font-mono mt-1">
                   Gestiona y monitorea tus inversiones
                 </p>
               </div>
@@ -168,13 +168,13 @@ export default function PortfolioPage() {
 
               {/* Top Holdings */}
               <div className="lg:col-span-2">
-                <div className="p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
+                <div className="p-6 border border-primary/20 bg-background rounded-none">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-[#00ff00] font-mono">
+                    <h3 className="text-lg font-bold text-primary font-mono">
                       {`>`} Principales Holdings
                     </h3>
                     {pricesLoading && (
-                      <div className="flex items-center gap-2 text-[#00ff00]/60 text-sm font-mono">
+                      <div className="flex items-center gap-2 text-primary/60 text-sm font-mono">
                         <ArrowPathIcon className="w-4 h-4 animate-spin" />
                         Actualizando...
                       </div>
@@ -203,7 +203,7 @@ export default function PortfolioPage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.05 }}
-                            className="flex items-center justify-between p-3 border border-[#00ff00]/10 hover:border-[#00ff00]/30 transition-all rounded-none"
+                            className="flex items-center justify-between p-3 border border-primary/10 hover:border-primary/30 transition-all rounded-none"
                           >
                             <div className="flex items-center gap-3 flex-1">
                               {item.image && (
@@ -217,17 +217,17 @@ export default function PortfolioPage() {
                                 />
                               )}
                               <div>
-                                <p className="font-bold text-[#00ff00] font-mono text-sm">
+                                <p className="font-bold text-primary font-mono text-sm">
                                   {item.name}
                                 </p>
-                                <p className="text-xs text-[#00ff00]/60 font-mono uppercase">
+                                <p className="text-xs text-primary/60 font-mono uppercase">
                                   {item.amount.toFixed(4)} {item.symbol}
                                 </p>
                               </div>
                             </div>
 
                             <div className="text-right">
-                              <p className="text-sm font-bold font-mono text-[#00ff00]">
+                              <p className="text-sm font-bold font-mono text-primary">
                                 ${item.currentValue.toLocaleString(undefined, {
                                   minimumFractionDigits: 2,
                                   maximumFractionDigits: 2,
@@ -258,7 +258,7 @@ export default function PortfolioPage() {
               animate={{ opacity: 1 }}
               className="space-y-4"
             >
-              <h2 className="text-2xl font-bold font-mono text-[#00ff00] mb-4">
+              <h2 className="text-2xl font-bold font-mono text-primary mb-4">
                 {`>`} Todos los Activos
               </h2>
 
@@ -278,7 +278,7 @@ export default function PortfolioPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="p-4 sm:p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none hover:border-[#00ff00]/40 transition-all"
+                    className="p-4 sm:p-6 border border-primary/20 bg-background rounded-none hover:border-primary/40 transition-all"
                   >
                     <div className="flex flex-col gap-4">
                       {/* Top Row */}
@@ -292,16 +292,16 @@ export default function PortfolioPage() {
                                 alt={item.name}
                                 width={48}
                                 height={48}
-                                className="rounded-full border border-[#00ff00]/20"
+                                className="rounded-full border border-primary/20"
                                 unoptimized
                               />
                             </div>
                           )}
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-xl font-bold text-[#00ff00] font-mono truncate">
+                            <h3 className="text-xl font-bold text-primary font-mono truncate">
                               {item.name}
                             </h3>
-                            <p className="text-sm text-[#00ff00]/60 font-mono uppercase">
+                            <p className="text-sm text-primary/60 font-mono uppercase">
                               {item.symbol}
                             </p>
                           </div>
@@ -309,10 +309,10 @@ export default function PortfolioPage() {
 
                         {/* Current Value */}
                         <div className="text-right">
-                          <p className="text-xs text-[#00ff00]/50 font-mono mb-1">
+                          <p className="text-xs text-primary/50 font-mono mb-1">
                             Valor Actual
                           </p>
-                          <p className="text-2xl font-bold text-[#00ff00] font-mono">
+                          <p className="text-2xl font-bold text-primary font-mono">
                             ${currentValue.toLocaleString(undefined, {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
@@ -337,7 +337,7 @@ export default function PortfolioPage() {
                       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                         {/* Cantidad */}
                         <div>
-                          <p className="text-xs text-[#00ff00]/50 font-mono mb-1">
+                          <p className="text-xs text-primary/50 font-mono mb-1">
                             Cantidad
                           </p>
                           {isEditing ? (
@@ -348,11 +348,11 @@ export default function PortfolioPage() {
                               onKeyPress={(e) => {
                                 if (e.key === 'Enter') handleSaveEdit(item.id);
                               }}
-                              className="w-full bg-[#0a0f1e] border border-[#00ff00] text-[#00ff00] px-2 py-1 text-sm font-mono focus:outline-none"
+                              className="w-full bg-background border border-primary text-primary px-2 py-1 text-sm font-mono focus:outline-none"
                               autoFocus
                             />
                           ) : (
-                            <p className="text-base font-mono text-[#00ff00]">
+                            <p className="text-base font-mono text-primary">
                               {item.amount.toFixed(8)}
                             </p>
                           )}
@@ -360,17 +360,17 @@ export default function PortfolioPage() {
 
                         {/* Precio Compra */}
                         <div>
-                          <p className="text-xs text-[#00ff00]/50 font-mono mb-1">
+                          <p className="text-xs text-primary/50 font-mono mb-1">
                             Compra
                           </p>
-                          <p className="text-base font-mono text-[#00ff00]">
+                          <p className="text-base font-mono text-primary">
                             ${item.buyPrice.toLocaleString()}
                           </p>
                         </div>
 
                         {/* Precio Actual */}
                         <div>
-                          <p className="text-xs text-[#00ff00]/50 font-mono mb-1">
+                          <p className="text-xs text-primary/50 font-mono mb-1">
                             Actual
                           </p>
                           <p className="text-base font-mono text-blue-400">
@@ -380,10 +380,10 @@ export default function PortfolioPage() {
 
                         {/* Invertido */}
                         <div>
-                          <p className="text-xs text-[#00ff00]/50 font-mono mb-1">
+                          <p className="text-xs text-primary/50 font-mono mb-1">
                             Invertido
                           </p>
-                          <p className="text-base font-mono text-[#00ff00]">
+                          <p className="text-base font-mono text-primary">
                             ${investedValue.toLocaleString(undefined, {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
@@ -393,7 +393,7 @@ export default function PortfolioPage() {
 
                         {/* Ganancia/Pérdida */}
                         <div>
-                          <p className="text-xs text-[#00ff00]/50 font-mono mb-1">
+                          <p className="text-xs text-primary/50 font-mono mb-1">
                             G/P
                           </p>
                           <div>
@@ -411,12 +411,12 @@ export default function PortfolioPage() {
                       </div>
 
                       {/* Actions */}
-                      <div className="flex items-center gap-2 pt-2 border-t border-[#00ff00]/10">
+                      <div className="flex items-center gap-2 pt-2 border-t border-primary/10">
                         {isEditing ? (
                           <>
                             <button
                               onClick={() => handleSaveEdit(item.id)}
-                              className="px-3 py-2 bg-[#00ff00]/20 border border-[#00ff00]/40 text-[#00ff00] hover:bg-[#00ff00]/30 transition-all text-xs font-mono rounded-none"
+                              className="px-3 py-2 bg-[#00ff00]/20 border border-primary/40 text-primary hover:bg-[#00ff00]/30 transition-all text-xs font-mono rounded-none"
                             >
                               ✓ Guardar
                             </button>
@@ -434,7 +434,7 @@ export default function PortfolioPage() {
                           <>
                             <button
                               onClick={() => handleEdit(item.id, item.amount)}
-                              className="p-2 bg-[#00ff00]/10 border border-[#00ff00]/20 text-[#00ff00] hover:bg-[#00ff00]/20 transition-all rounded-none"
+                              className="p-2 bg-[#00ff00]/10 border border-primary/20 text-primary hover:bg-[#00ff00]/20 transition-all rounded-none"
                               aria-label="Editar cantidad"
                             >
                               <PencilIcon className="w-4 h-4" />

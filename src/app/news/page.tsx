@@ -98,14 +98,14 @@ export default function NewsPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#0a0f1e] flex items-center justify-center">
+      <main className="min-h-screen bg-background flex items-center justify-center">
         <Loading message="Loading latest news..." />
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -132,12 +132,12 @@ export default function NewsPage() {
           className="mb-8"
         >
           <div className="flex items-center gap-3 mb-2">
-            <NewspaperIcon className="w-10 h-10 text-[#00ff00]" />
+            <NewspaperIcon className="w-10 h-10 text-primary" />
             <div>
-              <h1 className="text-4xl font-bold font-mono text-[#00ff00]">
+              <h1 className="text-4xl font-bold font-mono text-primary">
                 {`>`} NOTICIAS CRIPTO
               </h1>
-              <p className="text-[#00ff00]/60 font-mono mt-1">
+              <p className="text-primary/60 font-mono mt-1">
                 Mantente actualizado con las últimas novedades del mercado
               </p>
             </div>
@@ -153,7 +153,7 @@ export default function NewsPage() {
         >
           <div className="flex items-center gap-2 mb-4">
             <FireIcon className="w-6 h-6 text-orange-400" />
-            <h2 className="text-2xl font-bold font-mono text-[#00ff00]">
+            <h2 className="text-2xl font-bold font-mono text-primary">
               {`>`} TRENDING NOW
             </h2>
           </div>
@@ -168,7 +168,7 @@ export default function NewsPage() {
               >
                 <Link
                   href={`/coin/${coin.id}`}
-                  className="block p-3 border border-[#00ff00]/20 bg-[#0a0f1e] hover:border-orange-400/40 hover:bg-orange-400/5 transition-all rounded-none group"
+                  className="block p-3 border border-primary/20 bg-background hover:border-orange-400/40 hover:bg-orange-400/5 transition-all rounded-none group"
                 >
                   <div className="flex flex-col items-center gap-2">
                     <div className="relative w-12 h-12">
@@ -185,7 +185,7 @@ export default function NewsPage() {
                       </div>
                     </div>
                     <div className="text-center">
-                      <p className="text-xs font-bold text-[#00ff00] font-mono truncate w-full">
+                      <p className="text-xs font-bold text-primary font-mono truncate w-full">
                         {coin.symbol.toUpperCase()}
                       </p>
                     </div>
@@ -209,7 +209,7 @@ export default function NewsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.05 }}
-              className="group border border-[#00ff00]/20 bg-[#0a0f1e] hover:border-[#00ff00]/40 transition-all rounded-none overflow-hidden"
+              className="group border border-primary/20 bg-background hover:border-primary/40 transition-all rounded-none overflow-hidden"
             >
               {/* Image */}
               <div className="relative h-48 bg-[#00ff00]/5 overflow-hidden">
@@ -229,20 +229,20 @@ export default function NewsPage() {
 
               {/* Content */}
               <div className="p-4">
-                <div className="flex items-center gap-2 text-xs text-[#00ff00]/50 font-mono mb-3">
+                <div className="flex items-center gap-2 text-xs text-primary/50 font-mono mb-3">
                   <ClockIcon className="w-4 h-4" />
                   <span>{news.time}</span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#00ff00] font-mono mb-2 group-hover:text-[#00ff00]/80 transition-colors">
+                <h3 className="text-lg font-bold text-primary font-mono mb-2 group-hover:text-primary/80 transition-colors">
                   {news.title}
                 </h3>
 
-                <p className="text-sm text-[#00ff00]/70 font-mono leading-relaxed mb-4">
+                <p className="text-sm text-primary/70 font-mono leading-relaxed mb-4">
                   {news.excerpt}
                 </p>
 
-                <button className="inline-flex items-center gap-2 text-[#00ff00] hover:text-[#00ff00]/80 transition-colors font-mono text-sm">
+                <button className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-mono text-sm">
                   <span>Leer más</span>
                   <ArrowTopRightOnSquareIcon className="w-4 h-4" />
                 </button>
@@ -256,12 +256,12 @@ export default function NewsPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-12 p-6 border border-[#00ff00]/20 bg-[#00ff00]/5 rounded-none text-center"
+          className="mt-12 p-6 border border-primary/20 bg-[#00ff00]/5 rounded-none text-center"
         >
-          <p className="text-[#00ff00]/80 font-mono">
+          <p className="text-primary/80 font-mono">
             {`>`} Las noticias se actualizan automáticamente desde múltiples fuentes
           </p>
-          <p className="text-[#00ff00]/50 font-mono text-sm mt-2">
+          <p className="text-primary/50 font-mono text-sm mt-2">
             Próximamente: Integración con APIs de noticias en tiempo real
           </p>
         </motion.div>

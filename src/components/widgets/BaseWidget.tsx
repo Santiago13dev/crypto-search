@@ -28,13 +28,13 @@ export default function BaseWidget({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className={`h-full bg-[#0a0f1e] border border-[#00ff00]/30 rounded-lg overflow-hidden flex flex-col ${className}`}
+      className={`h-full bg-background border border-primary/30 rounded-lg overflow-hidden flex flex-col ${className}`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#00ff00]/30 bg-[#0a0f1e]/50 backdrop-blur-sm">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-primary/30 bg-background/50 backdrop-blur-sm">
         <div className="flex items-center gap-2">
-          {icon && <div className="text-[#00ff00]">{icon}</div>}
-          <h3 className="text-sm font-mono font-bold text-[#00ff00] tracking-wider">
+          {icon && <div className="text-primary">{icon}</div>}
+          <h3 className="text-sm font-mono font-bold text-primary tracking-wider">
             {`>`} {title}
           </h3>
         </div>
@@ -48,9 +48,9 @@ export default function BaseWidget({
               title={size === 'compact' ? 'Expandir' : 'Compactar'}
             >
               {size === 'compact' ? (
-                <ArrowsPointingOutIcon className="w-4 h-4 text-[#00ff00]" />
+                <ArrowsPointingOutIcon className="w-4 h-4 text-primary" />
               ) : (
-                <ArrowsPointingInIcon className="w-4 h-4 text-[#00ff00]" />
+                <ArrowsPointingInIcon className="w-4 h-4 text-primary" />
               )}
             </button>
           )}
@@ -61,7 +61,7 @@ export default function BaseWidget({
             className="p-1 hover:bg-red-500/10 rounded transition-colors group"
             title="Eliminar widget"
           >
-            <XMarkIcon className="w-4 h-4 text-[#00ff00] group-hover:text-red-500" />
+            <XMarkIcon className="w-4 h-4 text-primary group-hover:text-red-500" />
           </button>
         </div>
       </div>

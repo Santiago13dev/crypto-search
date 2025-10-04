@@ -165,7 +165,7 @@ Navega a: `http://localhost:3000/dashboard`
 
 ### Cambiar Colores
 Todos los widgets usan el tema terminal con `#00ff00`. Para cambiar:
-1. Busca `text-[#00ff00]` en los componentes
+1. Busca `text-primary` en los componentes
 2. Reemplaza con tu color preferido
 
 ### Ajustar Tamaños por Defecto

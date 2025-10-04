@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import CoinCard from '@/components/features/CoinCard';
 import SearchBar from '@/components/features/SearchBar';
 import Loading from '@/components/ui/Loading';
@@ -12,6 +13,8 @@ import { useCoinsSearch } from '@/hooks/useCoinsSearch';
 import { useFavorites } from '@/hooks/useFavorites';
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
+  const [mounted, setMounted] = useState(false);
   const { results, isLoading, handleSearch } = useCoinsSearch();
   const {
     favorites,
@@ -24,21 +27,35 @@ export default function Home() {
 
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
+  // Esperar a que el componente esté montado en el cliente
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Mostrar un loader mientras se monta
+  if (!mounted) {
+    return (
+      <main className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-primary font-mono">Loading...</div>
+      </main>
+    );
+  }
+
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
       {/* Grid de fondo - efecto terminal */}
       <div className="fixed inset-0 opacity-20 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`h-${i}`}
-            className="absolute w-full h-px bg-[#00ff00]"
+            className="absolute w-full h-px bg-primary"
             style={{ top: `${i * 5}%` }}
           />
         ))}
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`v-${i}`}
-            className="absolute h-full w-px bg-[#00ff00]"
+            className="absolute h-full w-px bg-primary"
             style={{ left: `${i * 5}%` }}
           />
         ))}
@@ -57,21 +74,21 @@ export default function Home() {
           <div className="relative mb-8">
             <div className="flex items-center justify-center gap-3 mb-2">
               <motion.span
-                className="text-[#00ff00] text-2xl md:text-3xl font-mono"
+                className="text-primary text-2xl md:text-3xl font-mono"
                 animate={{ opacity: [1, 0.5, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 {'>'}
               </motion.span>
               <motion.span
-                className="text-[#00ff00] text-2xl md:text-3xl font-mono"
+                className="text-primary text-2xl md:text-3xl font-mono"
                 animate={{ opacity: [1, 0.5, 1] }}
                 transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
               >
                 {'-'}
               </motion.span>
-              <h1 className="text-4xl md:text-6xl font-bold text-[#00ff00] font-mono tracking-wider">
-                CRYPTO SEARCH
+              <h1 className="text-4xl md:text-6xl font-bold text-primary font-mono tracking-wider">
+                {t('home.title')}
               </h1>
             </div>
 
@@ -80,17 +97,17 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-[#00ff00]/90 text-lg md:text-xl mb-2 mt-4 font-mono"
+              className="text-primary/90 text-lg md:text-xl mb-2 mt-4 font-mono"
             >
-              {`>`} Advanced cryptocurrency indexing system
+              {`>`} {t('home.subtitle')}
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-[#00ff00]/60 text-sm font-mono"
+              className="text-primary/60 text-sm font-mono"
             >
-              Real-time blockchain data at your fingertips
+              {t('home.description')}
             </motion.p>
           </div>
 
@@ -101,7 +118,11 @@ export default function Home() {
             transition={{ delay: 0.6 }}
             className="max-w-2xl mx-auto"
           >
-            <SearchBar onSearch={handleSearch} isLoading={isLoading} />
+            <SearchBar 
+              onSearch={handleSearch} 
+              isLoading={isLoading}
+              placeholder={t('home.searchPlaceholder')}
+            />
           </motion.div>
         </motion.div>
 
@@ -147,10 +168,8 @@ export default function Home() {
             transition={{ delay: 0.5 }}
             className="mt-12 text-center"
           >
-            <p className="text-[#00ff00]/50 text-sm font-mono">
-              {`>`} {results.length} resultado{results.length !== 1 ? 's' : ''}{' '}
-              encontrado
-              {results.length !== 1 ? 's' : ''}
+            <p className="text-primary/50 text-sm font-mono">
+              {`>`} {t('home.results', { count: results.length })}
             </p>
           </motion.div>
         )}

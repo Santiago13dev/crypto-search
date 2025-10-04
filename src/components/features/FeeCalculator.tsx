@@ -33,73 +33,73 @@ export default function FeeCalculator() {
   const fees = calculateFees();
 
   return (
-    <div className="p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
+    <div className="p-6 border border-primary/20 bg-background rounded-none">
       <div className="mb-6">
-        <h3 className="text-xl font-bold text-[#00ff00] font-mono mb-2">{`>`} Calculadora de Comisiones</h3>
-        <p className="text-sm text-[#00ff00]/60 font-mono">Compara comisiones entre exchanges</p>
+        <h3 className="text-xl font-bold text-primary font-mono mb-2">{`>`} Calculadora de Comisiones</h3>
+        <p className="text-sm text-primary/60 font-mono">Compara comisiones entre exchanges</p>
       </div>
 
       <div className="space-y-6">
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Monto (USD)</label>
-          <input type="number" step="any" value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none rounded-none" />
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Monto (USD)</label>
+          <input type="number" step="any" value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none rounded-none" />
         </div>
 
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Exchange</label>
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Exchange</label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {exchanges.map((exchange) => (
-              <button key={exchange.name} type="button" onClick={() => setSelectedExchange(exchange)} className={`px-4 py-2 font-mono text-sm transition-all rounded-none ${selectedExchange.name === exchange.name ? 'bg-[#00ff00] text-black font-bold' : 'bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00]'}`}>{exchange.name}</button>
+              <button key={exchange.name} type="button" onClick={() => setSelectedExchange(exchange)} className={`px-4 py-2 font-mono text-sm transition-all rounded-none ${selectedExchange.name === exchange.name ? 'bg-[#00ff00] text-black font-bold' : 'bg-background border border-primary/20 text-primary'}`}>{exchange.name}</button>
             ))}
           </div>
         </div>
 
         <div>
-          <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">{`>`} Tipo de Orden</label>
+          <label className="block text-sm text-primary/80 font-mono mb-2">{`>`} Tipo de Orden</label>
           <div className="grid grid-cols-2 gap-2">
             {[{ value: 'maker' as const, label: 'Maker' }, { value: 'taker' as const, label: 'Taker' }].map((type) => (
-              <button key={type.value} type="button" onClick={() => setOrderType(type.value)} className={`px-4 py-3 font-mono text-sm transition-all rounded-none ${orderType === type.value ? 'bg-[#00ff00] text-black font-bold' : 'bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00]'}`}>{type.label}</button>
+              <button key={type.value} type="button" onClick={() => setOrderType(type.value)} className={`px-4 py-3 font-mono text-sm transition-all rounded-none ${orderType === type.value ? 'bg-[#00ff00] text-black font-bold' : 'bg-background border border-primary/20 text-primary'}`}>{type.label}</button>
             ))}
           </div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="p-6 border-2 border-[#00ff00] bg-[#00ff00]/10 rounded-none">
-          <h4 className="text-lg font-bold text-[#00ff00] font-mono mb-4">Resumen</h4>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="p-6 border-2 border-primary bg-[#00ff00]/10 rounded-none">
+          <h4 className="text-lg font-bold text-primary font-mono mb-4">Resumen</h4>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-[#00ff00]/80 font-mono">Original:</span>
-              <span className="text-[#00ff00] font-mono font-bold">${parseFloat(amount).toLocaleString()}</span>
+              <span className="text-primary/80 font-mono">Original:</span>
+              <span className="text-primary font-mono font-bold">${parseFloat(amount).toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#00ff00]/80 font-mono">Comisión ({fees.feePercentage}%):</span>
+              <span className="text-primary/80 font-mono">Comisión ({fees.feePercentage}%):</span>
               <span className="text-red-400 font-mono font-bold">-${fees.tradingFee.toFixed(2)}</span>
             </div>
-            <div className="border-t border-[#00ff00]/20 pt-3 flex justify-between">
-              <span className="text-[#00ff00] font-mono font-bold">Total:</span>
-              <span className="text-2xl text-[#00ff00] font-mono font-bold">${fees.total.toFixed(2)}</span>
+            <div className="border-t border-primary/20 pt-3 flex justify-between">
+              <span className="text-primary font-mono font-bold">Total:</span>
+              <span className="text-2xl text-primary font-mono font-bold">${fees.total.toFixed(2)}</span>
             </div>
           </div>
         </motion.div>
 
         <div>
-          <h4 className="text-lg font-bold text-[#00ff00] font-mono mb-4">{`>`} Comparación</h4>
+          <h4 className="text-lg font-bold text-primary font-mono mb-4">{`>`} Comparación</h4>
           <div className="overflow-x-auto">
-            <table className="w-full border border-[#00ff00]/20">
+            <table className="w-full border border-primary/20">
               <thead>
-                <tr className="border-b border-[#00ff00]/20">
-                  <th className="p-3 text-left font-mono text-[#00ff00] text-sm">Exchange</th>
-                  <th className="p-3 text-center font-mono text-[#00ff00] text-sm">Maker</th>
-                  <th className="p-3 text-center font-mono text-[#00ff00] text-sm">Taker</th>
+                <tr className="border-b border-primary/20">
+                  <th className="p-3 text-left font-mono text-primary text-sm">Exchange</th>
+                  <th className="p-3 text-center font-mono text-primary text-sm">Maker</th>
+                  <th className="p-3 text-center font-mono text-primary text-sm">Taker</th>
                 </tr>
               </thead>
               <tbody>
                 {exchanges.map((exchange) => {
                   const isSelected = exchange.name === selectedExchange.name;
                   return (
-                    <tr key={exchange.name} className={`border-b border-[#00ff00]/10 ${isSelected ? 'bg-[#00ff00]/10' : ''}`}>
-                      <td className="p-3 font-mono text-[#00ff00]">{exchange.name}</td>
-                      <td className="p-3 text-center font-mono text-[#00ff00]/80">{exchange.makerFee}%</td>
-                      <td className="p-3 text-center font-mono text-[#00ff00]/80">{exchange.takerFee}%</td>
+                    <tr key={exchange.name} className={`border-b border-primary/10 ${isSelected ? 'bg-[#00ff00]/10' : ''}`}>
+                      <td className="p-3 font-mono text-primary">{exchange.name}</td>
+                      <td className="p-3 text-center font-mono text-primary/80">{exchange.makerFee}%</td>
+                      <td className="p-3 text-center font-mono text-primary/80">{exchange.takerFee}%</td>
                     </tr>
                   );
                 })}
