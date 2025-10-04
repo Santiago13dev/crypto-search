@@ -1,6 +1,5 @@
 export default {
   translation: {
-    // Common
     common: {
       search: 'Buscar',
       loading: 'Cargando...',
@@ -13,14 +12,9 @@ export default {
       save: 'Guardar',
       create: 'Crear',
       close: 'Cerrar',
-      back: 'Volver',
-      next: 'Siguiente',
-      previous: 'Anterior',
-      total: 'Total',
-      active: 'Activo',
-      inactive: 'Inactivo',
-      export: 'Exportar',
-      import: 'Importar',
+      add: 'Agregar',
+      clear: 'Limpiar',
+      remove: 'Eliminar',
     },
 
     nav: {
@@ -57,14 +51,61 @@ export default {
       profit: 'Ganancia',
       loss: 'Pérdida',
       diversification: 'Diversificación',
+      distribution: 'Distribución del Portafolio',
+      mainHoldings: 'Principales Holdings',
+      empty: 'No tienes inversiones',
+      emptyDescription: 'Haz clic en "Agregar" para comenzar a rastrear tu portafolio',
+      refreshing: 'Actualizando precios...',
+      total: 'Total',
+      amount: 'Cantidad',
+      buyPrice: 'Precio de Compra',
+      currentPrice: 'Precio Actual',
+      profitLoss: 'Ganancia/Pérdida',
+      actions: 'Acciones',
     },
 
     alerts: {
       title: 'ALERTAS DE PRECIOS',
       subtitle: 'Recibe notificaciones cuando el precio cambie',
       new: 'Nueva Alerta',
+      active: 'Activa',
+      active_plural: 'Activas',
+      triggered: 'Activada',
+      triggered_plural: 'Activadas',
+      total: 'Total',
       noAlerts: 'No tienes alertas configuradas',
       createFirst: 'Crear tu primera alerta',
+      description: 'Las alertas te notificarán cuando el precio alcance tu objetivo',
+    },
+
+    dashboard: {
+      title: 'DASHBOARD PERSONALIZABLE',
+      subtitle: 'Organiza tu información con widgets',
+      addWidget: 'Agregar Widget',
+      save: 'Guardar',
+      load: 'Cargar',
+      reset: 'Reset',
+      noWidgets: 'No hay widgets',
+      tip: 'Arrastra los widgets para reorganizar. Usa las esquinas para redimensionar.',
+    },
+
+    compare: {
+      title: 'COMPARAR CRIPTOMONEDAS',
+      subtitle: 'Análisis lado a lado de hasta 4 monedas',
+      add: 'Agregar Moneda',
+      remove: 'Eliminar',
+      noCoins: 'No hay monedas para comparar',
+      addCoins: 'Agrega hasta 4 criptomonedas para comparar',
+    },
+
+    converter: {
+      title: 'CONVERTIDOR Y CALCULADORAS',
+      subtitle: 'Convierte monedas y calcula comisiones',
+      amount: 'Cantidad',
+      from: 'Desde',
+      to: 'Hasta',
+      convert: 'Convertir',
+      result: 'Resultado',
     },
 
     favorites: {
@@ -72,6 +113,7 @@ export default {
       count: '{{count}} favorito',
       count_plural: '{{count}} favoritos',
       empty: 'Sin favoritos',
+      clearAll: 'Limpiar todo',
     },
 
     theme: {

@@ -1,10 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Providers from './providers';
-import Navbar from '@/components/features/Navbar';
-import { ThemeButton } from '@/components/theme';
-import { LanguageButton, I18nProvider } from '@/components/language';
-import { ThemeProvider } from '@/contexts/ThemeContext';
+import ClientLayout from './client-layout';
 
 export const metadata: Metadata = {
   title: 'Crypto Terminal - Buscador de Criptomonedas',
@@ -20,14 +17,9 @@ export default function RootLayout({
     <html lang="es">
       <body className="font-mono">
         <Providers>
-          <I18nProvider>
-            <ThemeProvider>
-              <Navbar />
-              {children}
-              <ThemeButton />
-              <LanguageButton />
-            </ThemeProvider>
-          </I18nProvider>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
         </Providers>
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 
 interface EmptyStateProps {
   message?: string;
@@ -13,11 +13,12 @@ export default function EmptyState({
   message,
   showIcon = true 
 }: EmptyStateProps) {
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const displayMessage = message || t('home.enterQuery');
 
   return (
     <motion.div
+      key={currentLanguage}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -49,7 +50,6 @@ export default function EmptyState({
         {`>`} {displayMessage}
       </motion.p>
 
-      {/* Líneas decorativas */}
       <div className="max-w-md mx-auto mt-8 space-y-2">
         {[60, 80, 70].map((width, i) => (
           <motion.div

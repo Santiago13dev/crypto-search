@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTranslation } from '@/components/language/I18nProvider';
 import {
   PlusIcon,
   TrashIcon,
@@ -14,13 +15,15 @@ import {
 } from '@heroicons/react/24/outline';
 import { usePortfolio } from '@/hooks/usePortfolio';
 import { useCurrentPrices } from '@/hooks/useCurrentPrices';
-import { formatNumber } from '@/lib/utils/helpers';
 import EmptyState from '@/components/ui/EmptyState';
 import QuickAddPortfolioModal from '@/components/features/QuickAddPortfolioModal';
 import PortfolioStats from '@/components/features/PortfolioStats';
 import PortfolioChart from '@/components/features/PortfolioChart';
 
 export default function PortfolioPage() {
+  const [mounted, setMounted] = useState(false);
+  const { t } = useTranslation();
+  
   const {
     portfolio,
     addToPortfolio,
@@ -34,9 +37,14 @@ export default function PortfolioPage() {
   const [editAmount, setEditAmount] = useState<string>('');
   const [showAddModal, setShowAddModal] = useState(false);
 
-  // Obtener precios actuales
   const coinIds = portfolio.map(item => item.id);
   const { prices, loading: pricesLoading } = useCurrentPrices(coinIds);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const handleEdit = (id: string, currentAmount: number) => {
     setEditingId(id);
@@ -72,7 +80,6 @@ export default function PortfolioPage() {
 
   const totalInvestment = getTotalInvestment();
 
-  // Calcular valor actual del portafolio
   const currentValue = portfolio.reduce((total, item) => {
     const currentPrice = prices[item.id]?.current_price || item.buyPrice;
     return total + (item.amount * currentPrice);
@@ -80,26 +87,24 @@ export default function PortfolioPage() {
 
   return (
     <main className="min-h-screen bg-background text-primary relative overflow-hidden">
-      {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`h-${i}`}
-            className="absolute w-full h-px bg-[#00ff00]"
+            className="absolute w-full h-px bg-primary"
             style={{ top: `${i * 5}%` }}
           />
         ))}
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`v-${i}`}
-            className="absolute h-full w-px bg-[#00ff00]"
+            className="absolute h-full w-px bg-primary"
             style={{ left: `${i * 5}%` }}
           />
         ))}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,10 +115,10 @@ export default function PortfolioPage() {
               <BriefcaseIcon className="w-10 h-10 text-primary" />
               <div>
                 <h1 className="text-4xl font-bold font-mono text-primary">
-                  {`>`} MI PORTAFOLIO
+                  {`>`} {t('portfolio.title')}
                 </h1>
                 <p className="text-primary/60 font-mono mt-1">
-                  Gestiona y monitorea tus inversiones
+                  {t('portfolio.subtitle')}
                 </p>
               </div>
             </div>
@@ -121,10 +126,11 @@ export default function PortfolioPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowAddModal(true)}
-                className="px-4 py-2 bg-[#00ff00] text-black font-bold font-mono hover:brightness-125 transition-all rounded-none flex items-center gap-2"
+                style={{ backgroundColor: 'var(--color-primary)', color: 'var(--color-background)' }}
+                className="px-4 py-2 font-bold font-mono hover:brightness-125 transition-all rounded-none flex items-center gap-2"
               >
                 <PlusIcon className="w-5 h-5" />
-                Agregar
+                {t('portfolio.add')}
               </button>
               
               {portfolio.length > 0 && (
@@ -133,7 +139,7 @@ export default function PortfolioPage() {
                   className="px-4 py-2 bg-red-500/20 border border-red-500/40 text-red-400 font-mono hover:bg-red-500/30 transition-all rounded-none flex items-center gap-2"
                 >
                   <TrashIcon className="w-5 h-5" />
-                  Limpiar
+                  {t('portfolio.clear')}
                 </button>
               )}
             </div>
@@ -142,12 +148,11 @@ export default function PortfolioPage() {
 
         {portfolio.length === 0 ? (
           <EmptyState
-            message="Tu portafolio está vacío"
+            message={t('portfolio.emptyDescription')}
             showIcon={false}
           />
         ) : (
           <>
-            {/* Stats Cards */}
             <div className="mb-8">
               <PortfolioStats
                 portfolio={portfolio}
@@ -156,9 +161,7 @@ export default function PortfolioPage() {
               />
             </div>
 
-            {/* Grid: Chart + Holdings */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-              {/* Chart */}
               <div className="lg:col-span-1">
                 <PortfolioChart
                   portfolio={portfolio}
@@ -166,17 +169,16 @@ export default function PortfolioPage() {
                 />
               </div>
 
-              {/* Top Holdings */}
               <div className="lg:col-span-2">
                 <div className="p-6 border border-primary/20 bg-background rounded-none">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-bold text-primary font-mono">
-                      {`>`} Principales Holdings
+                      {`>`} {t('portfolio.mainHoldings')}
                     </h3>
                     {pricesLoading && (
                       <div className="flex items-center gap-2 text-primary/60 text-sm font-mono">
                         <ArrowPathIcon className="w-4 h-4 animate-spin" />
-                        Actualizando...
+                        {t('portfolio.refreshing')}
                       </div>
                     )}
                   </div>
@@ -252,14 +254,13 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            {/* Full Portfolio List */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="space-y-4"
             >
               <h2 className="text-2xl font-bold font-mono text-primary mb-4">
-                {`>`} Todos los Activos
+                {`>`} {t('portfolio.total')}
               </h2>
 
               {portfolio.map((item, index) => {
@@ -281,9 +282,7 @@ export default function PortfolioPage() {
                     className="p-4 sm:p-6 border border-primary/20 bg-background rounded-none hover:border-primary/40 transition-all"
                   >
                     <div className="flex flex-col gap-4">
-                      {/* Top Row */}
                       <div className="flex items-center justify-between flex-wrap gap-4">
-                        {/* Coin Info */}
                         <div className="flex items-center gap-4 flex-1 min-w-0">
                           {item.image && (
                             <div className="relative w-12 h-12 flex-shrink-0">
@@ -307,10 +306,9 @@ export default function PortfolioPage() {
                           </div>
                         </div>
 
-                        {/* Current Value */}
                         <div className="text-right">
                           <p className="text-xs text-primary/50 font-mono mb-1">
-                            Valor Actual
+                            {t('portfolio.currentValue')}
                           </p>
                           <p className="text-2xl font-bold text-primary font-mono">
                             ${currentValue.toLocaleString(undefined, {
@@ -333,12 +331,10 @@ export default function PortfolioPage() {
                         </div>
                       </div>
 
-                      {/* Stats Grid */}
                       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-                        {/* Cantidad */}
                         <div>
                           <p className="text-xs text-primary/50 font-mono mb-1">
-                            Cantidad
+                            {t('portfolio.amount')}
                           </p>
                           {isEditing ? (
                             <input
@@ -358,30 +354,27 @@ export default function PortfolioPage() {
                           )}
                         </div>
 
-                        {/* Precio Compra */}
                         <div>
                           <p className="text-xs text-primary/50 font-mono mb-1">
-                            Compra
+                            {t('portfolio.buyPrice')}
                           </p>
                           <p className="text-base font-mono text-primary">
                             ${item.buyPrice.toLocaleString()}
                           </p>
                         </div>
 
-                        {/* Precio Actual */}
                         <div>
                           <p className="text-xs text-primary/50 font-mono mb-1">
-                            Actual
+                            {t('portfolio.currentPrice')}
                           </p>
                           <p className="text-base font-mono text-blue-400">
                             ${currentPrice.toLocaleString()}
                           </p>
                         </div>
 
-                        {/* Invertido */}
                         <div>
                           <p className="text-xs text-primary/50 font-mono mb-1">
-                            Invertido
+                            {t('portfolio.investment')}
                           </p>
                           <p className="text-base font-mono text-primary">
                             ${investedValue.toLocaleString(undefined, {
@@ -391,10 +384,9 @@ export default function PortfolioPage() {
                           </p>
                         </div>
 
-                        {/* Ganancia/Pérdida */}
                         <div>
                           <p className="text-xs text-primary/50 font-mono mb-1">
-                            G/P
+                            {t('portfolio.profitLoss')}
                           </p>
                           <div>
                             <p className={`text-base font-mono font-bold ${isProfit ? 'text-emerald-400' : 'text-red-400'}`}>
@@ -410,15 +402,14 @@ export default function PortfolioPage() {
                         </div>
                       </div>
 
-                      {/* Actions */}
                       <div className="flex items-center gap-2 pt-2 border-t border-primary/10">
                         {isEditing ? (
                           <>
                             <button
                               onClick={() => handleSaveEdit(item.id)}
-                              className="px-3 py-2 bg-[#00ff00]/20 border border-primary/40 text-primary hover:bg-[#00ff00]/30 transition-all text-xs font-mono rounded-none"
+                              className="px-3 py-2 bg-primary/20 border border-primary/40 text-primary hover:bg-primary/30 transition-all text-xs font-mono rounded-none"
                             >
-                              ✓ Guardar
+                              ✓ {t('common.save')}
                             </button>
                             <button
                               onClick={() => {
@@ -427,22 +418,22 @@ export default function PortfolioPage() {
                               }}
                               className="px-3 py-2 bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500/30 transition-all text-xs font-mono rounded-none"
                             >
-                              ✕ Cancelar
+                              ✕ {t('common.cancel')}
                             </button>
                           </>
                         ) : (
                           <>
                             <button
                               onClick={() => handleEdit(item.id, item.amount)}
-                              className="p-2 bg-[#00ff00]/10 border border-primary/20 text-primary hover:bg-[#00ff00]/20 transition-all rounded-none"
-                              aria-label="Editar cantidad"
+                              className="p-2 bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 transition-all rounded-none"
+                              aria-label={t('common.edit')}
                             >
                               <PencilIcon className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => removeFromPortfolio(item.id)}
                               className="p-2 bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-all rounded-none"
-                              aria-label="Eliminar"
+                              aria-label={t('common.delete')}
                             >
                               <TrashIcon className="w-4 h-4" />
                             </button>
@@ -457,7 +448,6 @@ export default function PortfolioPage() {
           </>
         )}
 
-        {/* Hint cuando está vacío */}
         {portfolio.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -467,16 +457,16 @@ export default function PortfolioPage() {
           >
             <button
               onClick={() => setShowAddModal(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00ff00] text-black font-bold font-mono hover:brightness-125 transition-all rounded-none"
+              style={{ backgroundColor: 'var(--color-primary)', color: 'var(--color-background)' }}
+              className="inline-flex items-center gap-2 px-6 py-3 font-bold font-mono hover:brightness-125 transition-all rounded-none"
             >
               <PlusIcon className="w-5 h-5" />
-              Comenzar a agregar criptomonedas
+              {t('portfolio.add')}
             </button>
           </motion.div>
         )}
       </div>
 
-      {/* Modal de Agregar */}
       <QuickAddPortfolioModal
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}

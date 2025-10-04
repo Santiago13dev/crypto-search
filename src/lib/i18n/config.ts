@@ -12,7 +12,6 @@ const resources = {
   pt,
 };
 
-// Verificar si estamos en el cliente
 const isBrowser = typeof window !== 'undefined';
 
 if (isBrowser && !i18n.isInitialized) {
@@ -22,11 +21,11 @@ if (isBrowser && !i18n.isInitialized) {
     .init({
       resources,
       fallbackLng: 'es',
-      lng: 'es', // Idioma inicial
+      // NO establecer lng aquí - dejar que LanguageDetector lo maneje
       defaultNS: 'translation',
       
       detection: {
-        order: ['localStorage', 'navigator'],
+        order: ['localStorage', 'navigator'], // Primero localStorage
         caches: ['localStorage'],
         lookupLocalStorage: 'crypto-search-language',
       },
@@ -37,18 +36,7 @@ if (isBrowser && !i18n.isInitialized) {
 
       react: {
         useSuspense: false,
-        bindI18n: 'languageChanged',
-        bindI18nStore: 'added',
       },
-
-      debug: true, // Activar para ver qué pasa en consola
-    })
-    .then(() => {
-      console.log('✅ i18next inicializado correctamente');
-      console.log('📍 Idioma detectado:', i18n.language);
-    })
-    .catch((err) => {
-      console.error('❌ Error inicializando i18next:', err);
     });
 }
 
