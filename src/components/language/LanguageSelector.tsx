@@ -16,19 +16,18 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
 
   const handleChangeLanguage = async (locale: Locale) => {
     try {
-      console.log('🔄 Cambiando idioma a:', locale);
-      
       await i18n.changeLanguage(locale);
-      
-      console.log('✅ Idioma cambiado a:', locale);
       
       const localeName = locales.find(l => l.code === locale)?.name;
       toast.success(`Idioma cambiado a ${localeName}`, { icon: '🌐' });
       
-      onClose();
+      // Esperar un momento para que se vea el toast
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
       
     } catch (error) {
-      console.error('❌ Error al cambiar idioma:', error);
+      console.error('Error al cambiar idioma:', error);
       toast.error('Error al cambiar idioma');
     }
   };
@@ -118,7 +117,7 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
                   color: 'var(--color-text-secondary)',
                 }}
               >
-                💡 Tu preferencia de idioma se guardará automáticamente
+                💡 La página se recargará para aplicar el idioma
               </div>
             </div>
           </motion.div>

@@ -21,11 +21,11 @@ if (isBrowser && !i18n.isInitialized) {
     .init({
       resources,
       fallbackLng: 'es',
-      lng: 'es',
+      // NO establecer lng aquí - dejar que LanguageDetector lo maneje
       defaultNS: 'translation',
       
       detection: {
-        order: ['localStorage', 'navigator'],
+        order: ['localStorage', 'navigator'], // Primero localStorage
         caches: ['localStorage'],
         lookupLocalStorage: 'crypto-search-language',
       },
@@ -36,11 +36,7 @@ if (isBrowser && !i18n.isInitialized) {
 
       react: {
         useSuspense: false,
-        bindI18n: 'languageChanged loaded',
-        bindI18nStore: 'added removed',
       },
-
-      debug: false,
     });
 }
 

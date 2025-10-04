@@ -1,30 +1,40 @@
 'use client';
 
-import { createContext, useContext, ReactNode, useEffect, useState, useCallback } from 'react';
-import { useTranslation as useI18nTranslation } from 'react-i18next';
+import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
+import { I18nextProvider, useTranslation as useI18nTranslation } from 'react-i18next';
 import i18n from '@/lib/i18n/config';
 import type { Locale } from '@/types/i18n';
 
 interface LanguageContextValue {
   currentLanguage: Locale;
-  renderKey: number;
 }
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [currentLanguage, setCurrentLanguage] = useState<Locale>('es');
-  const [renderKey, setRenderKey] = useState(0);
+  const [currentLanguage, setCurrentLanguage] = useState<Locale | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (i18n.isInitialized) {
-      setCurrentLanguage(i18n.language as Locale);
-    }
+    const initLanguage = async () => {
+      // Esperar a que i18next se inicialice completamente
+      if (!i18n.isInitialized) {
+        await new Promise((resolve) => {
+          i18n.on('initialized', resolve);
+        });
+      }
+
+      const lang = i18n.language as Locale;
+      console.log('🌐 Idioma cargado:', lang);
+      setCurrentLanguage(lang);
+      setIsReady(true);
+    };
+
+    initLanguage();
 
     const handleLanguageChange = (lng: string) => {
-      console.log('🔄 Forzando re-render completo de la aplicación');
+      console.log('🔄 Idioma cambiado a:', lng);
       setCurrentLanguage(lng as Locale);
-      setRenderKey(prev => prev + 1); // Incrementar para forzar re-render
     };
 
     i18n.on('languageChanged', handleLanguageChange);
@@ -34,17 +44,25 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // No renderizar nada hasta que el idioma esté listo
+  if (!isReady || !currentLanguage) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-primary font-mono">Loading...</div>
+      </div>
+    );
+  }
+
   const value: LanguageContextValue = {
     currentLanguage,
-    renderKey,
   };
 
   return (
-    <LanguageContext.Provider value={value}>
-      <div key={renderKey}>
+    <I18nextProvider i18n={i18n}>
+      <LanguageContext.Provider value={value}>
         {children}
-      </div>
-    </LanguageContext.Provider>
+      </LanguageContext.Provider>
+    </I18nextProvider>
   );
 }
 
@@ -55,7 +73,6 @@ export function useTranslation() {
   return {
     ...translation,
     currentLanguage: context?.currentLanguage || 'es',
-    renderKey: context?.renderKey || 0,
   };
 }
 

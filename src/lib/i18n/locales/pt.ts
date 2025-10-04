@@ -12,14 +12,9 @@ export default {
       save: 'Salvar',
       create: 'Criar',
       close: 'Fechar',
-      back: 'Voltar',
-      next: 'Próximo',
-      previous: 'Anterior',
-      total: 'Total',
-      active: 'Ativo',
-      inactive: 'Inativo',
-      export: 'Exportar',
-      import: 'Importar',
+      add: 'Adicionar',
+      clear: 'Limpar',
+      remove: 'Remover',
     },
 
     nav: {
@@ -56,14 +51,61 @@ export default {
       profit: 'Lucro',
       loss: 'Perda',
       diversification: 'Diversificação',
+      distribution: 'Distribuição do Portfólio',
+      mainHoldings: 'Principais Holdings',
+      empty: 'Sem investimentos',
+      emptyDescription: 'Clique em "Adicionar" para começar a rastrear seu portfólio',
+      refreshing: 'Atualizando preços...',
+      total: 'Total',
+      amount: 'Quantidade',
+      buyPrice: 'Preço de Compra',
+      currentPrice: 'Preço Atual',
+      profitLoss: 'Lucro/Perda',
+      actions: 'Ações',
     },
 
     alerts: {
       title: 'ALERTAS DE PREÇOS',
       subtitle: 'Receba notificações quando o preço mudar',
       new: 'Novo Alerta',
+      active: 'Ativo',
+      active_plural: 'Ativos',
+      triggered: 'Ativado',
+      triggered_plural: 'Ativados',
+      total: 'Total',
       noAlerts: 'Você não tem alertas configurados',
       createFirst: 'Crie seu primeiro alerta',
+      description: 'Os alertas irão notificá-lo quando o preço atingir seu objetivo',
+    },
+
+    dashboard: {
+      title: 'DASHBOARD PERSONALIZÁVEL',
+      subtitle: 'Organize suas informações com widgets',
+      addWidget: 'Adicionar Widget',
+      save: 'Salvar',
+      load: 'Carregar',
+      reset: 'Resetar',
+      noWidgets: 'Sem widgets',
+      tip: 'Arraste os widgets para reorganizar. Use os cantos para redimensionar.',
+    },
+
+    compare: {
+      title: 'COMPARAR CRIPTOMOEDAS',
+      subtitle: 'Análise lado a lado de até 4 moedas',
+      add: 'Adicionar Moeda',
+      remove: 'Remover',
+      noCoins: 'Sem moedas para comparar',
+      addCoins: 'Adicione até 4 criptomoedas para comparar',
+    },
+
+    converter: {
+      title: 'CONVERSOR E CALCULADORAS',
+      subtitle: 'Converta moedas e calcule taxas',
+      amount: 'Quantidade',
+      from: 'De',
+      to: 'Para',
+      convert: 'Converter',
+      result: 'Resultado',
     },
 
     favorites: {
@@ -71,6 +113,7 @@ export default {
       count: '{{count}} favorito',
       count_plural: '{{count}} favoritos',
       empty: 'Sem favoritos',
+      clearAll: 'Limpar tudo',
     },
 
     theme: {

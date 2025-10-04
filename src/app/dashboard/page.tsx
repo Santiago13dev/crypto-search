@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from '@/components/language/I18nProvider';
 import { useWidgets } from '@/hooks/useWidgets';
 import { 
   WidgetContainer, 
@@ -14,6 +15,9 @@ import type { WidgetType, WidgetSize } from '@/types/widget';
 import type { Layout } from 'react-grid-layout';
 
 export default function DashboardPage() {
+  const [mounted, setMounted] = useState(false);
+  const { t } = useTranslation();
+  
   const {
     widgets,
     layouts,
@@ -33,6 +37,12 @@ export default function DashboardPage() {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   const handleLayoutChange = (newLayouts: Layout[]) => {
     updateLayout(newLayouts);
   };
@@ -47,117 +57,50 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-background text-primary relative overflow-hidden">
-      {/* Grid de fondo - efecto terminal */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={`h-${i}`}
-            className="absolute w-full h-px bg-[#00ff00]"
-            style={{ top: `${i * 5}%` }}
-          />
+          <div key={`h-${i}`} className="absolute w-full h-px bg-primary" style={{ top: `${i * 5}%` }} />
         ))}
         {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={`v-${i}`}
-            className="absolute h-full w-px bg-[#00ff00]"
-            style={{ left: `${i * 5}%` }}
-          />
+          <div key={`v-${i}`} className="absolute h-full w-px bg-primary" style={{ left: `${i * 5}%` }} />
         ))}
       </div>
 
-      {/* Contenido principal */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <motion.span
-              className="text-primary text-2xl font-mono"
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              {'>'}
-            </motion.span>
-            <h1 className="text-3xl md:text-4xl font-bold text-primary font-mono tracking-wider">
-              DASHBOARD
+            <h1 className="text-4xl font-bold font-mono text-primary">
+              {`>`} {t('dashboard.title')}
             </h1>
           </div>
-          <p className="text-primary/60 text-sm font-mono ml-9">
-            Panel personalizable de widgets cripto
+          <p className="text-primary/60 font-mono mb-6">
+            {t('dashboard.subtitle')}
           </p>
-        </motion.div>
 
-        {/* Toolbar */}
-        <WidgetToolbar
-          onAddWidget={() => setIsAddModalOpen(true)}
-          onSaveLayout={() => setIsSaveModalOpen(true)}
-          onLoadLayout={() => setIsLoadModalOpen(true)}
-          onResetLayout={resetToDefault}
-          savedLayoutsCount={savedLayouts.length}
-          widgetsCount={widgets.length}
-        />
-
-        {/* Widget Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <WidgetContainer
-            widgets={widgets}
-            layouts={layouts}
-            onLayoutChange={handleLayoutChange}
-            onRemoveWidget={removeWidget}
-            onResizeWidget={handleResizeWidget}
+          <WidgetToolbar
+            widgetCount={widgets.length}
+            savedLayoutsCount={savedLayouts.length}
+            onAdd={() => setIsAddModalOpen(true)}
+            onSave={() => setIsSaveModalOpen(true)}
+            onLoad={() => setIsLoadModalOpen(true)}
+            onReset={resetToDefault}
           />
         </motion.div>
 
-        {/* Help text */}
-        {widgets.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-8 p-6 bg-[#00ff00]/5 border border-primary/30 rounded-lg"
-          >
-            <h3 className="text-lg font-mono font-bold text-primary mb-3">
-              {`>`} Primeros pasos
-            </h3>
-            <ul className="space-y-2 text-sm font-mono text-primary/80">
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Haz clic en <strong className="text-primary">&quot;Agregar Widget&quot;</strong> para añadir tu primer widget</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Arrastra los widgets para reorganizar tu dashboard</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Redimensiona usando el ícono en la esquina inferior derecha</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Guarda tus configuraciones favoritas con <strong className="text-primary">&quot;Guardar&quot;</strong></span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                <span>Alterna entre layouts guardados con <strong className="text-primary">&quot;Cargar&quot;</strong></span>
-              </li>
-            </ul>
-          </motion.div>
-        )}
+        <WidgetContainer
+          widgets={widgets}
+          layouts={layouts}
+          onLayoutChange={handleLayoutChange}
+          onRemoveWidget={removeWidget}
+          onResizeWidget={handleResizeWidget}
+        />
       </div>
 
-      {/* Modals */}
       <AddWidgetModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onAdd={handleAddWidget}
+        existingWidgets={widgets}
       />
 
       <SaveLayoutModal

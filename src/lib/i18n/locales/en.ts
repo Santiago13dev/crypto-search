@@ -12,14 +12,9 @@ export default {
       save: 'Save',
       create: 'Create',
       close: 'Close',
-      back: 'Back',
-      next: 'Next',
-      previous: 'Previous',
-      total: 'Total',
-      active: 'Active',
-      inactive: 'Inactive',
-      export: 'Export',
-      import: 'Import',
+      add: 'Add',
+      clear: 'Clear',
+      remove: 'Remove',
     },
 
     nav: {
@@ -56,14 +51,61 @@ export default {
       profit: 'Profit',
       loss: 'Loss',
       diversification: 'Diversification',
+      distribution: 'Portfolio Distribution',
+      mainHoldings: 'Main Holdings',
+      empty: 'No investments',
+      emptyDescription: 'Click "Add" to start tracking your portfolio',
+      refreshing: 'Refreshing prices...',
+      total: 'Total',
+      amount: 'Amount',
+      buyPrice: 'Buy Price',
+      currentPrice: 'Current Price',
+      profitLoss: 'Profit/Loss',
+      actions: 'Actions',
     },
 
     alerts: {
       title: 'PRICE ALERTS',
       subtitle: 'Get notified when the price changes',
       new: 'New Alert',
+      active: 'Active',
+      active_plural: 'Active',
+      triggered: 'Triggered',
+      triggered_plural: 'Triggered',
+      total: 'Total',
       noAlerts: 'You have no configured alerts',
       createFirst: 'Create your first alert',
+      description: 'Alerts will notify you when the price reaches your target',
+    },
+
+    dashboard: {
+      title: 'CUSTOMIZABLE DASHBOARD',
+      subtitle: 'Organize your information with widgets',
+      addWidget: 'Add Widget',
+      save: 'Save',
+      load: 'Load',
+      reset: 'Reset',
+      noWidgets: 'No widgets',
+      tip: 'Drag widgets to reorganize. Use corners to resize.',
+    },
+
+    compare: {
+      title: 'COMPARE CRYPTOCURRENCIES',
+      subtitle: 'Side-by-side analysis of up to 4 coins',
+      add: 'Add Coin',
+      remove: 'Remove',
+      noCoins: 'No coins to compare',
+      addCoins: 'Add up to 4 cryptocurrencies to compare',
+    },
+
+    converter: {
+      title: 'CONVERTER AND CALCULATORS',
+      subtitle: 'Convert currencies and calculate fees',
+      amount: 'Amount',
+      from: 'From',
+      to: 'To',
+      convert: 'Convert',
+      result: 'Result',
     },
 
     favorites: {
@@ -71,6 +113,7 @@ export default {
       count: '{{count}} favorite',
       count_plural: '{{count}} favorites',
       empty: 'No favorites',
+      clearAll: 'Clear all',
     },
 
     theme: {
