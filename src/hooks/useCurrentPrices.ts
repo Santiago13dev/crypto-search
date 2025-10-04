@@ -70,4 +70,8 @@ export const useCurrentPrices = (coinIds: string[]) => {
   }, [coinIds.join(',')]); // Solo re-ejecutar si cambian los IDs
 
   return { prices, loading, error };
+ feature/widgets-personalizables
 };
+=======
+};
+ main
