@@ -107,4 +107,8 @@ export default function PortfolioChart({ portfolio, totalInvestment }: Portfolio
       </div>
     </div>
   );
+ feature/widgets-personalizables
 }
+=======
+}
+ main
