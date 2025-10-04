@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   MagnifyingGlassIcon,
@@ -25,7 +25,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { favoritesCount } = useFavorites();
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -79,93 +79,88 @@ export default function Navbar() {
   ];
 
   return (
-    <>
-      <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-primary/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <motion.span
-                className="text-primary text-xl font-mono"
-                animate={{ opacity: [1, 0.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                {'>'}
-              </motion.span>
-              <span className="text-xl font-bold font-mono text-primary group-hover:text-primary/80 transition-colors">
-                CRYPTO TERMINAL
-              </span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href;
-                const Icon = item.icon;
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`relative px-4 py-2 font-mono text-sm transition-colors ${
-                      isActive
-                        ? 'text-primary'
-                        : 'text-primary/60 hover:text-primary'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Icon className="w-5 h-5" />
-                      <span>{item.name}</span>
-                    </div>
-
-                    {/* Indicador activo */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="navbar-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-
-              {/* Favoritos badge */}
-              {favoritesCount > 0 && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="ml-2 flex items-center gap-1 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full"
-                >
-                  <StarIcon className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-mono text-primary font-bold">
-                    {favoritesCount}
-                  </span>
-                </motion.div>
-              )}
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-primary hover:bg-primary/10 transition-colors rounded-none"
-              aria-label="Toggle menu"
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-primary/20" key={currentLanguage}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <motion.span
+              className="text-primary text-xl font-mono"
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
-              {mobileMenuOpen ? (
-                <XMarkIcon className="w-6 h-6" />
-              ) : (
-                <Bars3Icon className="w-6 h-6" />
-              )}
-            </button>
+              {'>'}
+            </motion.span>
+            <span className="text-xl font-bold font-mono text-primary group-hover:text-primary/80 transition-colors">
+              CRYPTO TERMINAL
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              const Icon = item.icon;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`relative px-4 py-2 font-mono text-sm transition-colors ${
+                    isActive
+                      ? 'text-primary'
+                      : 'text-primary/60 hover:text-primary'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Icon className="w-5 h-5" />
+                    <span>{item.name}</span>
+                  </div>
+
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-indicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+
+            {favoritesCount > 0 && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="ml-2 flex items-center gap-1 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full"
+              >
+                <StarIcon className="w-4 h-4 text-primary" />
+                <span className="text-xs font-mono text-primary font-bold">
+                  {favoritesCount}
+                </span>
+              </motion.div>
+            )}
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-primary hover:bg-primary/10 transition-colors rounded-none"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <XMarkIcon className="w-6 h-6" />
+            ) : (
+              <Bars3Icon className="w-6 h-6" />
+            )}
+          </button>
         </div>
-      </nav>
+      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -174,7 +169,6 @@ export default function Navbar() {
               className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 md:hidden"
             />
 
-            {/* Menu */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -225,7 +219,6 @@ export default function Navbar() {
                   })}
                 </nav>
 
-                {/* Favoritos en mobile */}
                 {favoritesCount > 0 && (
                   <div className="mt-6 p-4 border border-primary/20 bg-primary/5 rounded-none">
                     <div className="flex items-center gap-2 text-primary font-mono text-sm">
@@ -241,6 +234,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   );
 }

@@ -2,31 +2,29 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { LanguageIcon } from '@heroicons/react/24/outline';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 import { locales } from '@/types/i18n';
 import LanguageSelector from './LanguageSelector';
 
 export default function LanguageButton() {
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { i18n } = useTranslation();
+  const { currentLanguage } = useTranslation();
   
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // No renderizar hasta que esté montado en el cliente
   if (!mounted) {
     return null;
   }
 
-  const currentLocale = locales.find(l => l.code === i18n.language);
+  const currentLocale = locales.find(l => l.code === currentLanguage);
 
   return (
     <>
-      {/* Floating Button */}
       <motion.button
+        key={currentLanguage}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
@@ -40,7 +38,6 @@ export default function LanguageButton() {
       >
         <span className="text-2xl">{currentLocale?.flag || '🌐'}</span>
         
-        {/* Pulse effect */}
         <motion.div
           className="absolute inset-0 rounded-full"
           style={{
@@ -58,7 +55,6 @@ export default function LanguageButton() {
         />
       </motion.button>
 
-      {/* Language Selector Modal */}
       <LanguageSelector
         isOpen={isSelectorOpen}
         onClose={() => setIsSelectorOpen(false)}

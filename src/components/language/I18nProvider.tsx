@@ -1,28 +1,30 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
-import { I18nextProvider } from 'react-i18next';
+import { createContext, useContext, ReactNode, useEffect, useState, useCallback } from 'react';
+import { useTranslation as useI18nTranslation } from 'react-i18next';
 import i18n from '@/lib/i18n/config';
+import type { Locale } from '@/types/i18n';
 
-interface I18nProviderWrapperProps {
-  children: ReactNode;
+interface LanguageContextValue {
+  currentLanguage: Locale;
+  renderKey: number;
 }
 
-export default function I18nProviderWrapper({ children }: I18nProviderWrapperProps) {
-  const [mounted, setMounted] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [currentLanguage, setCurrentLanguage] = useState<Locale>('es');
+  const [renderKey, setRenderKey] = useState(0);
 
   useEffect(() => {
-    setMounted(true);
-    
-    console.log('🌐 i18n inicializado:', i18n.isInitialized);
-    console.log('🌐 Idioma actual:', i18n.language);
-    console.log('🌐 Idiomas disponibles:', Object.keys(i18n.options.resources || {}));
+    if (i18n.isInitialized) {
+      setCurrentLanguage(i18n.language as Locale);
+    }
 
-    // Listener para forzar re-render cuando cambie el idioma
     const handleLanguageChange = (lng: string) => {
-      console.log('🔄 I18nProvider detectó cambio de idioma:', lng);
-      setCurrentLanguage(lng);
+      console.log('🔄 Forzando re-render completo de la aplicación');
+      setCurrentLanguage(lng as Locale);
+      setRenderKey(prev => prev + 1); // Incrementar para forzar re-render
     };
 
     i18n.on('languageChanged', handleLanguageChange);
@@ -32,13 +34,29 @@ export default function I18nProviderWrapper({ children }: I18nProviderWrapperPro
     };
   }, []);
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
+  const value: LanguageContextValue = {
+    currentLanguage,
+    renderKey,
+  };
 
   return (
-    <I18nextProvider i18n={i18n} key={currentLanguage}>
-      {children}
-    </I18nextProvider>
+    <LanguageContext.Provider value={value}>
+      <div key={renderKey}>
+        {children}
+      </div>
+    </LanguageContext.Provider>
   );
 }
+
+export function useTranslation() {
+  const context = useContext(LanguageContext);
+  const translation = useI18nTranslation();
+  
+  return {
+    ...translation,
+    currentLanguage: context?.currentLanguage || 'es',
+    renderKey: context?.renderKey || 0,
+  };
+}
+
+export default I18nProvider;

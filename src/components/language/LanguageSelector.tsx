@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 import { LanguageIcon, XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { locales, type Locale } from '@/types/i18n';
 import { toast } from 'react-hot-toast';
@@ -12,16 +12,15 @@ interface LanguageSelectorProps {
 }
 
 export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorProps) {
-  const { i18n } = useTranslation();
-  const currentLanguage = i18n.language as Locale;
+  const { i18n, currentLanguage } = useTranslation();
 
   const handleChangeLanguage = async (locale: Locale) => {
     try {
-      console.log('🔄 Cambiando idioma de', i18n.language, 'a', locale);
+      console.log('🔄 Cambiando idioma a:', locale);
       
       await i18n.changeLanguage(locale);
       
-      console.log('✅ Idioma cambiado a:', i18n.language);
+      console.log('✅ Idioma cambiado a:', locale);
       
       const localeName = locales.find(l => l.code === locale)?.name;
       toast.success(`Idioma cambiado a ${localeName}`, { icon: '🌐' });
@@ -38,7 +37,6 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -47,7 +45,6 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
           />
 
-          {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -61,7 +58,6 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
                 borderColor: 'var(--color-primary)',
               }}
             >
-              {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
                   <LanguageIcon className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
@@ -78,7 +74,6 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
                 </button>
               </div>
 
-              {/* Language Options */}
               <div className="space-y-3">
                 {locales.map((locale) => {
                   const isActive = currentLanguage === locale.code;
@@ -115,7 +110,6 @@ export default function LanguageSelector({ isOpen, onClose }: LanguageSelectorPr
                 })}
               </div>
 
-              {/* Info */}
               <div 
                 className="mt-4 p-3 border font-mono text-sm"
                 style={{

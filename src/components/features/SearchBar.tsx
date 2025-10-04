@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface SearchBarProps {
@@ -17,7 +17,7 @@ export default function SearchBar({
 }: SearchBarProps) {
   const [query, setQuery] = useState('');
   const [mounted, setMounted] = useState(false);
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -45,9 +45,8 @@ export default function SearchBar({
   const displayPlaceholder = placeholder || t('home.searchPlaceholder');
 
   return (
-    <form onSubmit={handleSubmit} className="w-full font-mono">
+    <form onSubmit={handleSubmit} className="w-full font-mono" key={currentLanguage}>
       <div className="flex w-full max-w-2xl mx-auto relative group">
-        {/* Input */}
         <div className="relative flex-1">
           <input
             type="text"
@@ -63,13 +62,11 @@ export default function SearchBar({
             className="w-full border-2 placeholder-text-secondary/50 px-4 py-3 pl-12 focus:outline-none focus:border-primary-light rounded-l-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
           
-          {/* Icono de búsqueda */}
           <MagnifyingGlassIcon 
             className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6" 
             style={{ color: 'var(--color-primary)' }}
           />
           
-          {/* Botón limpiar */}
           {query && !isLoading && (
             <button
               type="button"
@@ -81,7 +78,6 @@ export default function SearchBar({
           )}
         </div>
 
-        {/* Botón de búsqueda */}
         <button
           type="submit"
           disabled={!query.trim() || isLoading}
@@ -103,12 +99,10 @@ export default function SearchBar({
             <span className="relative z-10">{t('home.searchButton')}</span>
           )}
           
-          {/* Efecto hover */}
           <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
         </button>
       </div>
 
-      {/* Línea decorativa inferior */}
       <div 
         className="mt-2 max-w-2xl mx-auto h-px bg-gradient-to-r from-transparent to-transparent"
         style={{

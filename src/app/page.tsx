@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 import CoinCard from '@/components/features/CoinCard';
 import SearchBar from '@/components/features/SearchBar';
 import Loading from '@/components/ui/Loading';
@@ -13,7 +13,7 @@ import { useCoinsSearch } from '@/hooks/useCoinsSearch';
 import { useFavorites } from '@/hooks/useFavorites';
 
 export default function Home() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n, currentLanguage } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const { results, isLoading, handleSearch } = useCoinsSearch();
   const {
@@ -27,12 +27,10 @@ export default function Home() {
 
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-  // Esperar a que el componente esté montado en el cliente
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Mostrar un loader mientras se monta
   if (!mounted) {
     return (
       <main className="min-h-screen bg-background flex items-center justify-center">
@@ -42,7 +40,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden" key={currentLanguage}>
       {/* Grid de fondo - efecto terminal */}
       <div className="fixed inset-0 opacity-20 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -121,7 +119,6 @@ export default function Home() {
             <SearchBar 
               onSearch={handleSearch} 
               isLoading={isLoading}
-              placeholder={t('home.searchPlaceholder')}
             />
           </motion.div>
         </motion.div>

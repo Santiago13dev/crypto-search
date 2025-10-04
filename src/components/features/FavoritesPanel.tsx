@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@/components/language/I18nProvider';
 import { XMarkIcon, TrashIcon, StarIcon } from '@heroicons/react/24/outline';
 import { FavoriteCoin } from '@/hooks/useFavorites';
 import Image from 'next/image';
@@ -24,7 +24,7 @@ export default function FavoritesPanel({
   onClearAll,
 }: FavoritesPanelProps) {
   const [mounted, setMounted] = useState(false);
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -36,7 +36,6 @@ export default function FavoritesPanel({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -45,15 +44,14 @@ export default function FavoritesPanel({
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
           />
 
-          {/* Panel */}
           <motion.div
+            key={currentLanguage}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed right-0 top-0 h-full w-full sm:w-96 bg-background border-l border-primary/20 z-50 overflow-hidden flex flex-col"
           >
-            {/* Header */}
             <div className="p-4 border-b border-primary/20">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
@@ -85,7 +83,6 @@ export default function FavoritesPanel({
               </div>
             </div>
 
-            {/* Content */}
             <div className="flex-1 overflow-y-auto p-4">
               {favorites.length === 0 ? (
                 <div className="text-center py-20 px-4">
@@ -107,7 +104,6 @@ export default function FavoritesPanel({
                     >
                       <Link href={`/coin/${coin.id}`} className="block">
                         <div className="flex items-center gap-3">
-                          {/* Imagen */}
                           <div className="relative w-10 h-10 flex-shrink-0">
                             <Image
                               src={coin.image}
@@ -117,7 +113,6 @@ export default function FavoritesPanel({
                             />
                           </div>
 
-                          {/* Info */}
                           <div className="flex-1 min-w-0">
                             <h3 className="text-sm font-bold text-primary font-mono truncate">
                               {coin.name}
@@ -129,7 +124,6 @@ export default function FavoritesPanel({
                         </div>
                       </Link>
 
-                      {/* Botón eliminar */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
