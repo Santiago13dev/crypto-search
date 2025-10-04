@@ -133,12 +133,12 @@ export default function QuickAddPortfolioModal({
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-[#0a0f1e] border-2 border-[#00ff00]/40 rounded-none max-w-md w-full p-6 max-h-[90vh] overflow-y-auto"
+              className="bg-background border-2 border-primary/40 rounded-none max-w-md w-full p-6 max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-[#00ff00] font-mono">
+                <h2 className="text-xl font-bold text-primary font-mono">
                   {`>`} Agregar al Portafolio
                 </h2>
                 <button
@@ -146,36 +146,36 @@ export default function QuickAddPortfolioModal({
                   className="p-2 hover:bg-[#00ff00]/10 transition-colors rounded-none"
                   aria-label="Cerrar"
                 >
-                  <XMarkIcon className="w-6 h-6 text-[#00ff00]" />
+                  <XMarkIcon className="w-6 h-6 text-primary" />
                 </button>
               </div>
 
               {/* Search */}
               {!selectedCoin && (
                 <div className="mb-4">
-                  <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                  <label className="block text-sm text-primary/80 font-mono mb-2">
                     {`>`} Buscar Criptomoneda
                   </label>
                   <div className="relative">
-                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00ff00]/50" />
+                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => handleSearch(e.target.value)}
                       placeholder="bitcoin, ethereum..."
-                      className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] placeholder-[#00ff00]/50 px-4 py-3 pl-12 focus:outline-none focus:border-[#00ff00] rounded-none font-mono"
+                      className="w-full bg-background border border-primary/40 text-primary placeholder-[#00ff00]/50 px-4 py-3 pl-12 focus:outline-none focus:border-primary rounded-none font-mono"
                     />
                   </div>
 
                   {/* Search Results */}
                   {searchQuery && (
-                    <div className="mt-2 max-h-60 overflow-y-auto border border-[#00ff00]/20 rounded-none">
+                    <div className="mt-2 max-h-60 overflow-y-auto border border-primary/20 rounded-none">
                       {isSearching ? (
-                        <div className="p-4 text-center text-[#00ff00]/60 font-mono text-sm">
+                        <div className="p-4 text-center text-primary/60 font-mono text-sm">
                           Buscando...
                         </div>
                       ) : searchResults.length === 0 ? (
-                        <div className="p-4 text-center text-[#00ff00]/60 font-mono text-sm">
+                        <div className="p-4 text-center text-primary/60 font-mono text-sm">
                           No se encontraron resultados
                         </div>
                       ) : (
@@ -197,15 +197,15 @@ export default function QuickAddPortfolioModal({
                                 />
                               )}
                               <div className="flex-1 min-w-0">
-                                <p className="text-[#00ff00] font-mono font-bold truncate">
+                                <p className="text-primary font-mono font-bold truncate">
                                   {coin.name}
                                 </p>
-                                <p className="text-[#00ff00]/60 font-mono text-sm uppercase">
+                                <p className="text-primary/60 font-mono text-sm uppercase">
                                   {coin.symbol}
                                 </p>
                               </div>
                               {coin.market_cap_rank && (
-                                <span className="text-[#00ff00]/50 font-mono text-sm">
+                                <span className="text-primary/50 font-mono text-sm">
                                   #{coin.market_cap_rank}
                                 </span>
                               )}
@@ -222,7 +222,7 @@ export default function QuickAddPortfolioModal({
               {selectedCoin && (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Selected Coin Display */}
-                  <div className="p-4 border border-[#00ff00]/20 bg-[#00ff00]/5 rounded-none flex items-center justify-between">
+                  <div className="p-4 border border-primary/20 bg-[#00ff00]/5 rounded-none flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {(selectedCoin.thumb || selectedCoin.large) && (
                         <Image
@@ -235,10 +235,10 @@ export default function QuickAddPortfolioModal({
                         />
                       )}
                       <div>
-                        <p className="text-[#00ff00] font-mono font-bold">
+                        <p className="text-primary font-mono font-bold">
                           {selectedCoin.name}
                         </p>
-                        <p className="text-[#00ff00]/60 font-mono text-sm uppercase">
+                        <p className="text-primary/60 font-mono text-sm uppercase">
                           {selectedCoin.symbol}
                         </p>
                       </div>
@@ -246,7 +246,7 @@ export default function QuickAddPortfolioModal({
                     <button
                       type="button"
                       onClick={() => setSelectedCoin(null)}
-                      className="text-[#00ff00]/60 hover:text-[#00ff00] text-sm font-mono underline"
+                      className="text-primary/60 hover:text-primary text-sm font-mono underline"
                     >
                       Cambiar
                     </button>
@@ -254,7 +254,7 @@ export default function QuickAddPortfolioModal({
 
                   {/* Amount */}
                   <div>
-                    <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                    <label className="block text-sm text-primary/80 font-mono mb-2">
                       {`>`} Cantidad
                     </label>
                     <input
@@ -264,13 +264,13 @@ export default function QuickAddPortfolioModal({
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="0.00"
                       required
-                      className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none"
+                      className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none"
                     />
                   </div>
 
                   {/* Buy Price */}
                   <div>
-                    <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                    <label className="block text-sm text-primary/80 font-mono mb-2">
                       {`>`} Precio de Compra (USD)
                     </label>
                     <input
@@ -280,10 +280,10 @@ export default function QuickAddPortfolioModal({
                       onChange={(e) => setBuyPrice(e.target.value)}
                       placeholder="0.00"
                       required
-                      className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none"
+                      className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none"
                     />
                     {currentPrice && (
-                      <p className="mt-2 text-xs text-[#00ff00]/60 font-mono">
+                      <p className="mt-2 text-xs text-primary/60 font-mono">
                         Precio actual: ${currentPrice.toLocaleString()}
                       </p>
                     )}
@@ -291,11 +291,11 @@ export default function QuickAddPortfolioModal({
 
                   {/* Total Value */}
                   {!isNaN(totalValue) && totalValue > 0 && (
-                    <div className="p-4 border border-[#00ff00]/20 bg-[#00ff00]/5 rounded-none">
-                      <p className="text-xs text-[#00ff00]/60 font-mono mb-1">
+                    <div className="p-4 border border-primary/20 bg-[#00ff00]/5 rounded-none">
+                      <p className="text-xs text-primary/60 font-mono mb-1">
                         Valor Total
                       </p>
-                      <p className="text-2xl font-bold text-[#00ff00] font-mono">
+                      <p className="text-2xl font-bold text-primary font-mono">
                         ${totalValue.toLocaleString(undefined, {
                           minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
@@ -309,7 +309,7 @@ export default function QuickAddPortfolioModal({
                     <button
                       type="button"
                       onClick={handleClose}
-                      className="flex-1 px-4 py-3 bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
+                      className="flex-1 px-4 py-3 bg-background border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
                     >
                       Cancelar
                     </button>

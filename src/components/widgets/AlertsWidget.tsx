@@ -22,7 +22,7 @@ export default function AlertsWidget({ id, size, onRemove, onResize }: WidgetPro
       icon={<BellAlertIcon className="w-5 h-5" />}
     >
       {displayAlerts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-full text-[#00ff00]/60 font-mono">
+        <div className="flex flex-col items-center justify-center h-full text-primary/60 font-mono">
           <BellAlertIcon className="w-12 h-12 mb-2" />
           <p>No hay alertas</p>
           <p className="text-xs mt-1">Crea alertas de precio</p>
@@ -37,9 +37,9 @@ export default function AlertsWidget({ id, size, onRemove, onResize }: WidgetPro
                 key={alert.id}
                 className={`p-3 rounded border ${
                   isTriggered
-                    ? 'bg-[#00ff00]/10 border-[#00ff00]'
-                    : 'bg-[#00ff00]/5 border-[#00ff00]/20'
-                } hover:border-[#00ff00]/40 transition-colors`}
+                    ? 'bg-[#00ff00]/10 border-primary'
+                    : 'bg-[#00ff00]/5 border-primary/20'
+                } hover:border-primary/40 transition-colors`}
               >
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center gap-2">
@@ -47,10 +47,10 @@ export default function AlertsWidget({ id, size, onRemove, onResize }: WidgetPro
                       <img src={alert.coinImage} alt={alert.coinName} className="w-6 h-6" />
                     )}
                     <div>
-                      <p className="font-mono font-bold text-[#00ff00] text-sm">
+                      <p className="font-mono font-bold text-primary text-sm">
                         {alert.coinSymbol.toUpperCase()}
                       </p>
-                      <p className="text-xs text-[#00ff00]/60 font-mono">{alert.coinName}</p>
+                      <p className="text-xs text-primary/60 font-mono">{alert.coinName}</p>
                     </div>
                   </div>
                   
@@ -62,7 +62,7 @@ export default function AlertsWidget({ id, size, onRemove, onResize }: WidgetPro
                 </div>
 
                 <div className="space-y-1">
-                  <p className="text-xs font-mono text-[#00ff00]/80">
+                  <p className="text-xs font-mono text-primary/80">
                     {alert.condition === 'above' && `Precio > $${alert.targetPrice}`}
                     {alert.condition === 'below' && `Precio < $${alert.targetPrice}`}
                     {alert.condition === 'change_up' && `Aumento > ${alert.targetPercentage}%`}
@@ -70,13 +70,13 @@ export default function AlertsWidget({ id, size, onRemove, onResize }: WidgetPro
                   </p>
                   
                   {alert.note && (
-                    <p className="text-xs text-[#00ff00]/60 font-mono italic">
+                    <p className="text-xs text-primary/60 font-mono italic">
                       {alert.note}
                     </p>
                   )}
 
                   <div className="flex items-center justify-between mt-2">
-                    <div className="flex items-center gap-1 text-xs text-[#00ff00]/50 font-mono">
+                    <div className="flex items-center gap-1 text-xs text-primary/50 font-mono">
                       <ClockIcon className="w-3 h-3" />
                       <span>
                         {new Date(alert.createdAt).toLocaleDateString()}

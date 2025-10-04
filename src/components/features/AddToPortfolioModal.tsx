@@ -68,7 +68,7 @@ export default function AddToPortfolioModal({
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-[#0a0f1e] border-2 border-[#00ff00]/40 rounded-none max-w-md w-full p-6"
+              className="bg-background border-2 border-primary/40 rounded-none max-w-md w-full p-6"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -87,10 +87,10 @@ export default function AddToPortfolioModal({
                     </div>
                   )}
                   <div>
-                    <h2 className="text-xl font-bold text-[#00ff00] font-mono">
+                    <h2 className="text-xl font-bold text-primary font-mono">
                       Agregar a Portafolio
                     </h2>
-                    <p className="text-sm text-[#00ff00]/60 font-mono">
+                    <p className="text-sm text-primary/60 font-mono">
                       {coinName} ({coinSymbol.toUpperCase()})
                     </p>
                   </div>
@@ -100,7 +100,7 @@ export default function AddToPortfolioModal({
                   className="p-2 hover:bg-[#00ff00]/10 transition-colors rounded-none"
                   aria-label="Cerrar"
                 >
-                  <XMarkIcon className="w-6 h-6 text-[#00ff00]" />
+                  <XMarkIcon className="w-6 h-6 text-primary" />
                 </button>
               </div>
 
@@ -108,7 +108,7 @@ export default function AddToPortfolioModal({
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Amount */}
                 <div>
-                  <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                  <label className="block text-sm text-primary/80 font-mono mb-2">
                     {`>`} Cantidad
                   </label>
                   <input
@@ -118,13 +118,13 @@ export default function AddToPortfolioModal({
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="0.00"
                     required
-                    className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none"
+                    className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none"
                   />
                 </div>
 
                 {/* Buy Price */}
                 <div>
-                  <label className="block text-sm text-[#00ff00]/80 font-mono mb-2">
+                  <label className="block text-sm text-primary/80 font-mono mb-2">
                     {`>`} Precio de Compra (USD)
                   </label>
                   <input
@@ -134,13 +134,13 @@ export default function AddToPortfolioModal({
                     onChange={(e) => setBuyPrice(e.target.value)}
                     placeholder="0.00"
                     required
-                    className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] px-4 py-3 font-mono focus:outline-none focus:border-[#00ff00] rounded-none"
+                    className="w-full bg-background border border-primary/40 text-primary px-4 py-3 font-mono focus:outline-none focus:border-primary rounded-none"
                   />
                   {currentPrice && (
                     <button
                       type="button"
                       onClick={() => setBuyPrice(currentPrice.toString())}
-                      className="mt-2 text-xs text-[#00ff00]/60 hover:text-[#00ff00] font-mono underline"
+                      className="mt-2 text-xs text-primary/60 hover:text-primary font-mono underline"
                     >
                       Usar precio actual: ${currentPrice.toLocaleString()}
                     </button>
@@ -149,11 +149,11 @@ export default function AddToPortfolioModal({
 
                 {/* Total Value */}
                 {!isNaN(totalValue) && totalValue > 0 && (
-                  <div className="p-4 border border-[#00ff00]/20 bg-[#00ff00]/5 rounded-none">
-                    <p className="text-xs text-[#00ff00]/60 font-mono mb-1">
+                  <div className="p-4 border border-primary/20 bg-[#00ff00]/5 rounded-none">
+                    <p className="text-xs text-primary/60 font-mono mb-1">
                       Valor Total
                     </p>
-                    <p className="text-2xl font-bold text-[#00ff00] font-mono">
+                    <p className="text-2xl font-bold text-primary font-mono">
                       ${totalValue.toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
@@ -167,7 +167,7 @@ export default function AddToPortfolioModal({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="flex-1 px-4 py-3 bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
+                    className="flex-1 px-4 py-3 bg-background border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
                   >
                     Cancelar
                   </button>

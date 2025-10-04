@@ -17,7 +17,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] flex items-center justify-center">
+    <main className="min-h-screen bg-background text-primary flex items-center justify-center">
       <div className="text-center p-8 max-w-md">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -25,13 +25,13 @@ export default function Error({
           className="mb-6"
         >
           <div className="text-6xl mb-4">⚠️</div>
-          <h1 className="text-3xl font-bold font-mono mb-4 text-[#00ff00]">
+          <h1 className="text-3xl font-bold font-mono mb-4 text-primary">
             {`>`} ERROR
           </h1>
-          <p className="text-[#00ff00]/70 font-mono mb-2">
+          <p className="text-primary/70 font-mono mb-2">
             {error.message || 'Something went wrong loading this cryptocurrency'}
           </p>
-          <p className="text-[#00ff00]/50 font-mono text-sm">
+          <p className="text-primary/50 font-mono text-sm">
             Please try again or return to home
           </p>
         </motion.div>
@@ -39,7 +39,7 @@ export default function Error({
         <div className="flex gap-4 justify-center flex-wrap">
           <button
             onClick={reset}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00ff00]/10 border border-[#00ff00]/20 text-[#00ff00] font-bold font-mono rounded-none hover:bg-[#00ff00]/20 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00ff00]/10 border border-primary/20 text-primary font-bold font-mono rounded-none hover:bg-[#00ff00]/20 transition-all"
           >
             {`>`} TRY AGAIN
           </button>

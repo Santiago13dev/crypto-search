@@ -187,7 +187,7 @@ export default function ComparePage() {
     : null;
 
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -214,12 +214,12 @@ export default function ComparePage() {
           className="mb-8"
         >
           <div className="flex items-center gap-3 mb-6">
-            <ScaleIcon className="w-10 h-10 text-[#00ff00]" />
+            <ScaleIcon className="w-10 h-10 text-primary" />
             <div>
-              <h1 className="text-4xl font-bold font-mono text-[#00ff00]">
+              <h1 className="text-4xl font-bold font-mono text-primary">
                 {`>`} COMPARADOR DE CRIPTOMONEDAS
               </h1>
-              <p className="text-[#00ff00]/60 font-mono mt-1">
+              <p className="text-primary/60 font-mono mt-1">
                 Compara hasta 4 criptomonedas lado a lado
               </p>
             </div>
@@ -227,25 +227,25 @@ export default function ComparePage() {
 
           {/* Search Bar */}
           <div className="relative max-w-2xl">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00ff00]/50" />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Buscar criptomoneda para comparar..."
               disabled={selectedCoins.length >= 4}
-              className="w-full bg-[#0a0f1e] border border-[#00ff00]/40 text-[#00ff00] placeholder-[#00ff00]/50 px-4 py-3 pl-12 focus:outline-none focus:border-[#00ff00] rounded-none font-mono disabled:opacity-50"
+              className="w-full bg-background border border-primary/40 text-primary placeholder-[#00ff00]/50 px-4 py-3 pl-12 focus:outline-none focus:border-primary rounded-none font-mono disabled:opacity-50"
             />
 
             {/* Search Results */}
             {searchQuery && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-[#0a0f1e] border border-[#00ff00]/40 rounded-none max-h-96 overflow-y-auto z-50">
+              <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-primary/40 rounded-none max-h-96 overflow-y-auto z-50">
                 {isSearching ? (
-                  <div className="p-4 text-center text-[#00ff00]/60 font-mono text-sm">
+                  <div className="p-4 text-center text-primary/60 font-mono text-sm">
                     Buscando...
                   </div>
                 ) : searchResults.length === 0 ? (
-                  <div className="p-4 text-center text-[#00ff00]/60 font-mono text-sm">
+                  <div className="p-4 text-center text-primary/60 font-mono text-sm">
                     No se encontraron resultados
                   </div>
                 ) : (
@@ -268,15 +268,15 @@ export default function ComparePage() {
                           />
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="text-[#00ff00] font-mono font-bold truncate">
+                          <p className="text-primary font-mono font-bold truncate">
                             {coin.name}
                           </p>
-                          <p className="text-[#00ff00]/60 font-mono text-sm uppercase">
+                          <p className="text-primary/60 font-mono text-sm uppercase">
                             {coin.symbol}
                           </p>
                         </div>
                         {coin.market_cap_rank && (
-                          <span className="text-[#00ff00]/50 font-mono text-sm">
+                          <span className="text-primary/50 font-mono text-sm">
                             #{coin.market_cap_rank}
                           </span>
                         )}
@@ -288,7 +288,7 @@ export default function ComparePage() {
             )}
           </div>
 
-          <p className="text-[#00ff00]/50 font-mono text-sm mt-4">
+          <p className="text-primary/50 font-mono text-sm mt-4">
             {selectedCoins.length}/4 criptomonedas seleccionadas
           </p>
         </motion.div>
@@ -305,7 +305,7 @@ export default function ComparePage() {
             {selectedCoins.map((coin) => (
               <div
                 key={coin.id}
-                className="flex items-center gap-2 px-4 py-2 bg-[#00ff00]/10 border border-[#00ff00]/20 rounded-none"
+                className="flex items-center gap-2 px-4 py-2 bg-[#00ff00]/10 border border-primary/20 rounded-none"
               >
                 {coin.image && (
                   <Image
@@ -317,12 +317,12 @@ export default function ComparePage() {
                     unoptimized
                   />
                 )}
-                <span className="font-mono text-[#00ff00] font-bold">
+                <span className="font-mono text-primary font-bold">
                   {coin.name}
                 </span>
                 <button
                   onClick={() => handleRemoveCoin(coin.id)}
-                  className="text-[#00ff00]/60 hover:text-red-400 transition-colors"
+                  className="text-primary/60 hover:text-red-400 transition-colors"
                 >
                   <XMarkIcon className="w-4 h-4" />
                 </button>
@@ -339,12 +339,12 @@ export default function ComparePage() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mb-8 p-6 border-2 border-[#00ff00] bg-[#00ff00]/10 rounded-none"
+                className="mb-8 p-6 border-2 border-primary bg-[#00ff00]/10 rounded-none"
               >
                 <div className="flex items-center gap-4 justify-center flex-wrap">
-                  <TrophyIcon className="w-12 h-12 text-[#00ff00]" />
+                  <TrophyIcon className="w-12 h-12 text-primary" />
                   <div className="text-center">
-                    <p className="text-sm text-[#00ff00]/60 font-mono mb-1">
+                    <p className="text-sm text-primary/60 font-mono mb-1">
                       MEJOR PUNTUACIÓN GENERAL
                     </p>
                     <div className="flex items-center gap-3 justify-center">
@@ -358,10 +358,10 @@ export default function ComparePage() {
                           unoptimized
                         />
                       )}
-                      <h2 className="text-3xl font-bold text-[#00ff00] font-mono">
+                      <h2 className="text-3xl font-bold text-primary font-mono">
                         {bestCoin.name}
                       </h2>
-                      <span className="text-2xl font-bold text-[#00ff00] font-mono">
+                      <span className="text-2xl font-bold text-primary font-mono">
                         {bestCoin.score}/100
                       </span>
                     </div>
@@ -380,8 +380,8 @@ export default function ComparePage() {
                   transition={{ delay: index * 0.1 }}
                   className={`p-4 border rounded-none ${
                     coin.id === bestCoin?.id
-                      ? 'border-[#00ff00] bg-[#00ff00]/10'
-                      : 'border-[#00ff00]/20 bg-[#0a0f1e]'
+                      ? 'border-primary bg-[#00ff00]/10'
+                      : 'border-primary/20 bg-background'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-2">
@@ -396,14 +396,14 @@ export default function ComparePage() {
                       />
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-[#00ff00] font-mono text-sm truncate">
+                      <p className="font-bold text-primary font-mono text-sm truncate">
                         {coin.name}
                       </p>
                     </div>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs text-[#00ff00]/60 font-mono mb-1">Score</p>
-                    <p className="text-3xl font-bold text-[#00ff00] font-mono">
+                    <p className="text-xs text-primary/60 font-mono mb-1">Score</p>
+                    <p className="text-3xl font-bold text-primary font-mono">
                       {coin.score}
                     </p>
                     <div className="mt-2 h-2 bg-[#00ff00]/10 rounded-none overflow-hidden">
@@ -426,16 +426,16 @@ export default function ComparePage() {
               transition={{ delay: 0.3 }}
               className="overflow-x-auto"
             >
-              <table className="w-full border border-[#00ff00]/20">
+              <table className="w-full border border-primary/20">
                 <thead>
-                  <tr className="border-b border-[#00ff00]/20">
-                    <th className="p-4 text-left font-mono text-[#00ff00] bg-[#0a0f1e]">
+                  <tr className="border-b border-primary/20">
+                    <th className="p-4 text-left font-mono text-primary bg-background">
                       Métrica
                     </th>
                     {selectedCoins.map((coin) => (
                       <th
                         key={coin.id}
-                        className="p-4 text-center font-mono text-[#00ff00] bg-[#0a0f1e] min-w-[150px]"
+                        className="p-4 text-center font-mono text-primary bg-background min-w-[150px]"
                       >
                         <div className="flex flex-col items-center gap-2">
                           {coin.image && (
@@ -464,9 +464,9 @@ export default function ComparePage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 + index * 0.05 }}
-                        className="border-b border-[#00ff00]/10 hover:bg-[#00ff00]/5 transition-colors"
+                        className="border-b border-primary/10 hover:bg-[#00ff00]/5 transition-colors"
                       >
-                        <td className="p-4 font-mono text-[#00ff00]/80">
+                        <td className="p-4 font-mono text-primary/80">
                           {metric.label}
                         </td>
                         {selectedCoins.map((coin) => {
@@ -480,12 +480,12 @@ export default function ComparePage() {
                               key={coin.id}
                               className={`p-4 text-center font-mono ${
                                 isWinner
-                                  ? 'bg-[#00ff00]/10 font-bold text-[#00ff00]'
+                                  ? 'bg-[#00ff00]/10 font-bold text-primary'
                                   : isPercentage
                                   ? isPositive
                                     ? 'text-emerald-400'
                                     : 'text-red-400'
-                                  : 'text-[#00ff00]/60'
+                                  : 'text-primary/60'
                               }`}
                             >
                               <div className="flex items-center justify-center gap-1">
@@ -516,12 +516,12 @@ export default function ComparePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="mt-8 p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none"
+              className="mt-8 p-6 border border-primary/20 bg-background rounded-none"
             >
-              <h3 className="text-xl font-bold text-[#00ff00] font-mono mb-4">
+              <h3 className="text-xl font-bold text-primary font-mono mb-4">
                 {`>`} Análisis de Comparación
               </h3>
-              <div className="space-y-3 text-[#00ff00]/80 font-mono text-sm">
+              <div className="space-y-3 text-primary/80 font-mono text-sm">
                 <p>
                   • <strong>{bestCoin?.name}</strong> tiene la mejor puntuación general con{' '}
                   <strong>{bestCoin?.score}/100 puntos</strong>.
@@ -532,7 +532,7 @@ export default function ComparePage() {
                 <p>
                   • Las métricas con 🏆 indican el mejor valor en cada categoría.
                 </p>
-                <p className="pt-3 text-[#00ff00]/50 text-xs">
+                <p className="pt-3 text-primary/50 text-xs">
                   ⚠️ Esta comparación es solo informativa. Siempre investiga antes de invertir.
                 </p>
               </div>
@@ -540,17 +540,17 @@ export default function ComparePage() {
           </>
         ) : selectedCoins.length === 1 ? (
           <div className="text-center py-12">
-            <p className="text-[#00ff00]/60 font-mono">
+            <p className="text-primary/60 font-mono">
               Selecciona al menos una criptomoneda más para comenzar la comparación
             </p>
           </div>
         ) : (
           <div className="text-center py-12">
-            <ScaleIcon className="w-20 h-20 text-[#00ff00]/20 mx-auto mb-4" />
-            <p className="text-[#00ff00]/60 font-mono mb-2">
+            <ScaleIcon className="w-20 h-20 text-primary/20 mx-auto mb-4" />
+            <p className="text-primary/60 font-mono mb-2">
               Selecciona al menos 2 criptomonedas para comparar
             </p>
-            <p className="text-[#00ff00]/40 font-mono text-sm">
+            <p className="text-primary/40 font-mono text-sm">
               Usa el buscador para agregar monedas
             </p>
           </div>

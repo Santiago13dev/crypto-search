@@ -23,10 +23,10 @@ export default function PriceWidget({ id, size, onRemove, onResize }: WidgetProp
     >
       {loading ? (
         <div className="flex items-center justify-center h-full">
-          <div className="text-[#00ff00] font-mono animate-pulse">Cargando precios...</div>
+          <div className="text-primary font-mono animate-pulse">Cargando precios...</div>
         </div>
       ) : favorites.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-full text-[#00ff00]/60 font-mono">
+        <div className="flex flex-col items-center justify-center h-full text-primary/60 font-mono">
           <CurrencyDollarIcon className="w-12 h-12 mb-2" />
           <p>No hay favoritos</p>
           <p className="text-xs mt-1">Agrega monedas a favoritos</p>
@@ -41,20 +41,20 @@ export default function PriceWidget({ id, size, onRemove, onResize }: WidgetProp
             return (
               <div
                 key={coin.id}
-                className="flex items-center justify-between p-3 bg-[#00ff00]/5 border border-[#00ff00]/20 rounded hover:border-[#00ff00]/40 transition-colors"
+                className="flex items-center justify-between p-3 bg-[#00ff00]/5 border border-primary/20 rounded hover:border-primary/40 transition-colors"
               >
                 <div className="flex items-center gap-3">
                   {coin.image && (
                     <img src={coin.image} alt={coin.name} className="w-8 h-8" />
                   )}
                   <div>
-                    <p className="font-mono font-bold text-[#00ff00]">{coin.symbol.toUpperCase()}</p>
-                    <p className="text-xs text-[#00ff00]/60 font-mono">{coin.name}</p>
+                    <p className="font-mono font-bold text-primary">{coin.symbol.toUpperCase()}</p>
+                    <p className="text-xs text-primary/60 font-mono">{coin.name}</p>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <p className="font-mono font-bold text-[#00ff00]">
+                  <p className="font-mono font-bold text-primary">
                     ${price?.current_price?.toLocaleString() || '---'}
                   </p>
                   <div className={`flex items-center gap-1 justify-end text-xs font-mono ${

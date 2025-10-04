@@ -44,9 +44,9 @@ export default function PortfolioStats({
       label: 'Inversión Total',
       value: formatNumber(totalInvestment),
       icon: BanknotesIcon,
-      color: 'text-[#00ff00]',
+      color: 'text-primary',
       bgColor: 'bg-[#00ff00]/10',
-      borderColor: 'border-[#00ff00]/20',
+      borderColor: 'border-primary/20',
     },
     {
       label: 'Valor Actual',
@@ -90,7 +90,7 @@ export default function PortfolioStats({
             className={`p-4 border ${stat.borderColor} ${stat.bgColor} rounded-none`}
           >
             <div className="flex items-start justify-between mb-3">
-              <p className="text-xs text-[#00ff00]/60 font-mono uppercase">
+              <p className="text-xs text-primary/60 font-mono uppercase">
                 {stat.label}
               </p>
               <Icon className={`w-5 h-5 ${stat.color}`} />

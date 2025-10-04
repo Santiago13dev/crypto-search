@@ -62,12 +62,12 @@ export default function WidgetContainer({
 
   if (widgets.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] border-2 border-dashed border-[#00ff00]/30 rounded-lg">
+      <div className="flex flex-col items-center justify-center min-h-[400px] border-2 border-dashed border-primary/30 rounded-lg">
         <div className="text-center">
-          <p className="text-2xl font-mono text-[#00ff00] mb-2">
+          <p className="text-2xl font-mono text-primary mb-2">
             {`>`} No hay widgets
           </p>
-          <p className="text-sm text-[#00ff00]/60 font-mono">
+          <p className="text-sm text-primary/60 font-mono">
             Haz clic en &quot;Agregar Widget&quot; para comenzar
           </p>
         </div>

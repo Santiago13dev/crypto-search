@@ -1,5 +1,8 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useTranslation } from 'react-i18next';
 
 interface EmptyStateProps {
   message?: string;
@@ -7,9 +10,12 @@ interface EmptyStateProps {
 }
 
 export default function EmptyState({ 
-  message = "Enter a cryptocurrency name to start searching...",
+  message,
   showIcon = true 
 }: EmptyStateProps) {
+  const { t } = useTranslation();
+  const displayMessage = message || t('home.enterQuery');
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -25,8 +31,11 @@ export default function EmptyState({
           className="inline-block mb-6"
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-[#00ff00]/10 rounded-full blur-xl"></div>
-            <MagnifyingGlassIcon className="w-20 h-20 text-[#00ff00]/30 relative z-10" />
+            <div 
+              className="absolute inset-0 rounded-full blur-xl"
+              style={{ backgroundColor: 'var(--color-primary)', opacity: 0.1 }}
+            ></div>
+            <MagnifyingGlassIcon className="w-20 h-20 text-primary/30 relative z-10" />
           </div>
         </motion.div>
       )}
@@ -35,9 +44,9 @@ export default function EmptyState({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="text-[#00ff00]/70 text-lg font-mono mb-4"
+        className="text-primary/70 text-lg font-mono mb-4"
       >
-        {`>`} {message}
+        {`>`} {displayMessage}
       </motion.p>
 
       {/* Líneas decorativas */}
@@ -48,7 +57,11 @@ export default function EmptyState({
             initial={{ width: 0 }}
             animate={{ width: `${width}%` }}
             transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
-            className="h-px bg-gradient-to-r from-transparent via-[#00ff00]/20 to-transparent mx-auto"
+            className="h-px mx-auto"
+            style={{
+              backgroundImage: 'linear-gradient(to right, transparent, var(--color-primary), transparent)',
+              opacity: 0.2,
+            }}
           />
         ))}
       </div>

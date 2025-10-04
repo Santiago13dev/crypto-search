@@ -3,7 +3,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] flex items-center justify-center relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary flex items-center justify-center relative overflow-hidden">
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-20 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -24,11 +24,11 @@ export default function NotFound() {
 
       <div className="text-center p-8 max-w-md relative z-10">
         <div className="mb-8">
-          <h1 className="text-9xl font-bold font-mono text-[#00ff00] mb-4">404</h1>
-          <div className="text-2xl font-mono text-[#00ff00]/80 mb-2">
+          <h1 className="text-9xl font-bold font-mono text-primary mb-4">404</h1>
+          <div className="text-2xl font-mono text-primary/80 mb-2">
             {`>`} CRYPTOCURRENCY NOT FOUND
           </div>
-          <p className="text-[#00ff00]/60 font-mono text-sm">
+          <p className="text-primary/60 font-mono text-sm">
             The cryptocurrency you&apos;re looking for doesn&apos;t exist or has been removed.
           </p>
         </div>
@@ -42,7 +42,7 @@ export default function NotFound() {
         </Link>
 
         {/* Efecto de glitch */}
-        <div className="mt-8 font-mono text-xs text-[#00ff00]/30">
+        <div className="mt-8 font-mono text-xs text-primary/30">
           ERROR_CODE: COIN_NOT_FOUND_404
         </div>
       </div>

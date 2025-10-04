@@ -34,7 +34,7 @@ export default function FavoriteButton({
         e.stopPropagation();
         onToggle();
       }}
-      className={`${buttonSizeClasses[size]} rounded-none border border-[#00ff00]/20 bg-[#0a0f1e] hover:bg-[#00ff00]/10 transition-all group relative ${
+      className={`${buttonSizeClasses[size]} rounded-none border border-primary/20 bg-background hover:bg-[#00ff00]/10 transition-all group relative ${
         showLabel ? 'flex items-center gap-2 px-3' : ''
       }`}
       whileHover={{ scale: 1.1 }}
@@ -47,16 +47,16 @@ export default function FavoriteButton({
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 500, damping: 15 }}
         >
-          <StarIcon className={`${sizeClasses[size]} text-[#00ff00]`} />
+          <StarIcon className={`${sizeClasses[size]} text-primary`} />
         </motion.div>
       ) : (
         <StarOutlineIcon
-          className={`${sizeClasses[size]} text-[#00ff00]/50 group-hover:text-[#00ff00] transition-colors`}
+          className={`${sizeClasses[size]} text-primary/50 group-hover:text-primary transition-colors`}
         />
       )}
 
       {showLabel && (
-        <span className="text-xs font-mono text-[#00ff00]">
+        <span className="text-xs font-mono text-primary">
           {isFavorite ? 'Favorito' : 'Agregar'}
         </span>
       )}

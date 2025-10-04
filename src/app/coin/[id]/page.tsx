@@ -73,7 +73,7 @@ export default function CoinPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] flex items-center justify-center">
+      <main className="min-h-screen bg-background text-primary flex items-center justify-center">
         <Loading message="Loading cryptocurrency data..." />
       </main>
     );
@@ -81,7 +81,7 @@ export default function CoinPage() {
 
   if (error || !coin) {
     return (
-      <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] flex items-center justify-center">
+      <main className="min-h-screen bg-background text-primary flex items-center justify-center">
         <div className="text-center p-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -90,7 +90,7 @@ export default function CoinPage() {
           >
             <div className="text-6xl mb-4">⚠️</div>
             <h1 className="text-2xl font-bold font-mono mb-2">Error</h1>
-            <p className="text-[#00ff00]/70 font-mono mb-6">
+            <p className="text-primary/70 font-mono mb-6">
               {error || 'No se pudo cargar la información de la criptomoneda'}
             </p>
           </motion.div>
@@ -123,7 +123,7 @@ export default function CoinPage() {
   const homepage = getFirstValidUrl(coin.links?.homepage);
 
   return (
-    <main className="min-h-screen bg-[#0a0f1e] text-[#00ff00] relative overflow-hidden">
+    <main className="min-h-screen bg-background text-primary relative overflow-hidden">
       {/* Grid de fondo */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
@@ -151,7 +151,7 @@ export default function CoinPage() {
         >
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0a0f1e] border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-background border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
           >
             <ArrowLeftIcon className="w-5 h-5" />
             {`>`} BACK
@@ -174,20 +174,20 @@ export default function CoinPage() {
                     alt={coin.name}
                     width={80}
                     height={80}
-                    className="rounded-full border-2 border-[#00ff00]/20 relative z-10"
+                    className="rounded-full border-2 border-primary/20 relative z-10"
                     unoptimized
                   />
                 </div>
               )}
               <div>
-                <h1 className="text-3xl sm:text-5xl font-bold font-mono text-[#00ff00]">
+                <h1 className="text-3xl sm:text-5xl font-bold font-mono text-primary">
                   {coin.name}
                 </h1>
-                <p className="text-xl text-[#00ff00]/70 font-mono uppercase mt-1">
+                <p className="text-xl text-primary/70 font-mono uppercase mt-1">
                   {coin.symbol}
                 </p>
                 {coin.market_cap_rank && (
-                  <p className="text-sm text-[#00ff00]/50 font-mono mt-2">
+                  <p className="text-sm text-primary/50 font-mono mt-2">
                     {`>`} Rank #{coin.market_cap_rank}
                   </p>
                 )}
@@ -198,7 +198,7 @@ export default function CoinPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowPortfolioModal(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#00ff00]/10 border border-[#00ff00]/40 text-[#00ff00] font-mono hover:bg-[#00ff00]/20 transition-all rounded-none"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[#00ff00]/10 border border-primary/40 text-primary font-mono hover:bg-[#00ff00]/20 transition-all rounded-none"
               >
                 <PlusIcon className="w-5 h-5" />
                 <span className="hidden sm:inline">Portafolio</span>
@@ -228,11 +228,11 @@ export default function CoinPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-8 p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none"
+            className="mb-8 p-6 border border-primary/20 bg-background rounded-none"
           >
-            <p className="text-sm text-[#00ff00]/60 font-mono mb-2">{`>`} CURRENT PRICE</p>
+            <p className="text-sm text-primary/60 font-mono mb-2">{`>`} CURRENT PRICE</p>
             <div className="flex items-end gap-4 flex-wrap">
-              <h2 className="text-4xl sm:text-6xl font-bold font-mono text-[#00ff00]">
+              <h2 className="text-4xl sm:text-6xl font-bold font-mono text-primary">
                 ${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 8 })}
               </h2>
               {change24h !== undefined && (
@@ -249,7 +249,7 @@ export default function CoinPage() {
                   >
                     {change24hData.value}
                   </span>
-                  <span className="text-sm text-[#00ff00]/60 font-mono">24h</span>
+                  <span className="text-sm text-primary/60 font-mono">24h</span>
                 </div>
               )}
             </div>
@@ -264,24 +264,24 @@ export default function CoinPage() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"
         >
           {marketCap !== undefined && (
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
-              <p className="text-xs text-[#00ff00]/60 font-mono mb-2">{`>`} MARKET CAP</p>
-              <p className="text-2xl font-bold font-mono text-[#00ff00]">
+            <div className="p-4 border border-primary/20 bg-background rounded-none">
+              <p className="text-xs text-primary/60 font-mono mb-2">{`>`} MARKET CAP</p>
+              <p className="text-2xl font-bold font-mono text-primary">
                 {formatNumber(marketCap)}
               </p>
             </div>
           )}
           {volume !== undefined && (
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
-              <p className="text-xs text-[#00ff00]/60 font-mono mb-2">{`>`} VOLUME 24H</p>
-              <p className="text-2xl font-bold font-mono text-[#00ff00]">
+            <div className="p-4 border border-primary/20 bg-background rounded-none">
+              <p className="text-xs text-primary/60 font-mono mb-2">{`>`} VOLUME 24H</p>
+              <p className="text-2xl font-bold font-mono text-primary">
                 {formatNumber(volume)}
               </p>
             </div>
           )}
           {change7d !== undefined && (
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
-              <p className="text-xs text-[#00ff00]/60 font-mono mb-2">{`>`} CHANGE 7D</p>
+            <div className="p-4 border border-primary/20 bg-background rounded-none">
+              <p className="text-xs text-primary/60 font-mono mb-2">{`>`} CHANGE 7D</p>
               <p
                 className={`text-2xl font-bold font-mono ${
                   change7dData.isPositive ? 'text-emerald-400' : 'text-red-400'
@@ -292,7 +292,7 @@ export default function CoinPage() {
             </div>
           )}
           {high24h !== undefined && (
-            <div className="p-4 border border-emerald-500/20 bg-[#0a0f1e] rounded-none">
+            <div className="p-4 border border-emerald-500/20 bg-background rounded-none">
               <p className="text-xs text-emerald-400/60 font-mono mb-2">{`>`} HIGH 24H</p>
               <p className="text-2xl font-bold font-mono text-emerald-400">
                 ${high24h.toLocaleString()}
@@ -300,7 +300,7 @@ export default function CoinPage() {
             </div>
           )}
           {low24h !== undefined && (
-            <div className="p-4 border border-red-500/20 bg-[#0a0f1e] rounded-none">
+            <div className="p-4 border border-red-500/20 bg-background rounded-none">
               <p className="text-xs text-red-400/60 font-mono mb-2">{`>`} LOW 24H</p>
               <p className="text-2xl font-bold font-mono text-red-400">
                 ${low24h.toLocaleString()}
@@ -308,9 +308,9 @@ export default function CoinPage() {
             </div>
           )}
           {circulatingSupply !== undefined && (
-            <div className="p-4 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
-              <p className="text-xs text-[#00ff00]/60 font-mono mb-2">{`>`} CIRCULATING SUPPLY</p>
-              <p className="text-2xl font-bold font-mono text-[#00ff00]">
+            <div className="p-4 border border-primary/20 bg-background rounded-none">
+              <p className="text-xs text-primary/60 font-mono mb-2">{`>`} CIRCULATING SUPPLY</p>
+              <p className="text-2xl font-bold font-mono text-primary">
                 {circulatingSupply.toLocaleString()} {coin.symbol.toUpperCase()}
               </p>
             </div>
@@ -322,30 +322,30 @@ export default function CoinPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mb-8 p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none"
+            className="mb-8 p-6 border border-primary/20 bg-background rounded-none"
           >
-            <p className="text-sm text-[#00ff00]/60 font-mono mb-4">{`>`} SUPPLY INFORMATION</p>
+            <p className="text-sm text-primary/60 font-mono mb-4">{`>`} SUPPLY INFORMATION</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {circulatingSupply !== undefined && (
                 <div>
-                  <p className="text-xs text-[#00ff00]/50 font-mono mb-1">Circulating</p>
-                  <p className="text-lg font-mono text-[#00ff00]">
+                  <p className="text-xs text-primary/50 font-mono mb-1">Circulating</p>
+                  <p className="text-lg font-mono text-primary">
                     {circulatingSupply.toLocaleString()}
                   </p>
                 </div>
               )}
               {totalSupply !== undefined && (
                 <div>
-                  <p className="text-xs text-[#00ff00]/50 font-mono mb-1">Total</p>
-                  <p className="text-lg font-mono text-[#00ff00]">
+                  <p className="text-xs text-primary/50 font-mono mb-1">Total</p>
+                  <p className="text-lg font-mono text-primary">
                     {totalSupply.toLocaleString()}
                   </p>
                 </div>
               )}
               {maxSupply !== undefined && (
                 <div>
-                  <p className="text-xs text-[#00ff00]/50 font-mono mb-1">Max</p>
-                  <p className="text-lg font-mono text-[#00ff00]">
+                  <p className="text-xs text-primary/50 font-mono mb-1">Max</p>
+                  <p className="text-lg font-mono text-primary">
                     {maxSupply.toLocaleString()}
                   </p>
                 </div>
@@ -359,11 +359,11 @@ export default function CoinPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mb-8 p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none"
+            className="mb-8 p-6 border border-primary/20 bg-background rounded-none"
           >
-            <p className="text-sm text-[#00ff00]/60 font-mono mb-4">{`>`} ABOUT {coin.name.toUpperCase()}</p>
+            <p className="text-sm text-primary/60 font-mono mb-4">{`>`} ABOUT {coin.name.toUpperCase()}</p>
             <div
-              className="text-[#00ff00]/80 font-mono text-sm leading-relaxed"
+              className="text-primary/80 font-mono text-sm leading-relaxed"
               dangerouslySetInnerHTML={{
                 __html: coin.description.en.split('. ').slice(0, 3).join('. ') + '.',
               }}
@@ -376,16 +376,16 @@ export default function CoinPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none"
+            className="p-6 border border-primary/20 bg-background rounded-none"
           >
-            <p className="text-sm text-[#00ff00]/60 font-mono mb-4">{`>`} LINKS</p>
+            <p className="text-sm text-primary/60 font-mono mb-4">{`>`} LINKS</p>
             <div className="flex flex-wrap gap-3">
               {homepage && (
                 <a
                   href={homepage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
                 >
                   <GlobeAltIcon className="w-5 h-5" />
                   Website
@@ -396,7 +396,7 @@ export default function CoinPage() {
                   href={coin.links.blockchain_site[0]}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-[#00ff00]/20 text-[#00ff00] font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 text-primary font-mono hover:bg-[#00ff00]/10 transition-all rounded-none"
                 >
                   <ChartBarIcon className="w-5 h-5" />
                   Explorer

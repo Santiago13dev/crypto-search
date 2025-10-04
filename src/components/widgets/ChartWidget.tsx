@@ -44,8 +44,8 @@ export default function ChartWidget({ id, size, onRemove, onResize }: WidgetProp
                 onClick={() => setSelectedCoin(coin.id)}
                 className={`flex items-center gap-2 px-3 py-2 rounded border font-mono text-xs whitespace-nowrap transition-colors ${
                   selectedCoin === coin.id
-                    ? 'bg-[#00ff00]/20 border-[#00ff00] text-[#00ff00]'
-                    : 'bg-[#00ff00]/5 border-[#00ff00]/20 text-[#00ff00]/60 hover:border-[#00ff00]/40'
+                    ? 'bg-[#00ff00]/20 border-primary text-primary'
+                    : 'bg-[#00ff00]/5 border-primary/20 text-primary/60 hover:border-primary/40'
                 }`}
               >
                 {coin.image && (
@@ -125,16 +125,16 @@ export default function ChartWidget({ id, size, onRemove, onResize }: WidgetProp
 
         {/* Chart info */}
         <div className="grid grid-cols-3 gap-2 text-xs font-mono">
-          <div className="p-2 bg-[#00ff00]/5 border border-[#00ff00]/20 rounded">
-            <p className="text-[#00ff00]/60 mb-1">Máximo</p>
-            <p className="text-[#00ff00] font-bold">${maxPrice.toLocaleString()}</p>
+          <div className="p-2 bg-[#00ff00]/5 border border-primary/20 rounded">
+            <p className="text-primary/60 mb-1">Máximo</p>
+            <p className="text-primary font-bold">${maxPrice.toLocaleString()}</p>
           </div>
-          <div className="p-2 bg-[#00ff00]/5 border border-[#00ff00]/20 rounded">
-            <p className="text-[#00ff00]/60 mb-1">Mínimo</p>
-            <p className="text-[#00ff00] font-bold">${minPrice.toLocaleString()}</p>
+          <div className="p-2 bg-[#00ff00]/5 border border-primary/20 rounded">
+            <p className="text-primary/60 mb-1">Mínimo</p>
+            <p className="text-primary font-bold">${minPrice.toLocaleString()}</p>
           </div>
-          <div className="p-2 bg-[#00ff00]/5 border border-[#00ff00]/20 rounded">
-            <p className="text-[#00ff00]/60 mb-1">Variación</p>
+          <div className="p-2 bg-[#00ff00]/5 border border-primary/20 rounded">
+            <p className="text-primary/60 mb-1">Variación</p>
             <p className="text-green-400 font-bold">+{((range / minPrice) * 100).toFixed(2)}%</p>
           </div>
         </div>

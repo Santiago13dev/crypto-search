@@ -59,24 +59,24 @@ export default function NewsWidget({ id, size, onRemove, onResize }: WidgetProps
         {displayNews.map((news) => (
           <div
             key={news.id}
-            className="p-3 bg-[#00ff00]/5 border border-[#00ff00]/20 rounded hover:border-[#00ff00]/40 transition-colors cursor-pointer group"
+            className="p-3 bg-[#00ff00]/5 border border-primary/20 rounded hover:border-primary/40 transition-colors cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-2">
-              <h4 className="text-sm font-mono font-bold text-[#00ff00] group-hover:text-[#00ff00]/80 transition-colors line-clamp-2">
+              <h4 className="text-sm font-mono font-bold text-primary group-hover:text-primary/80 transition-colors line-clamp-2">
                 {news.title}
               </h4>
             </div>
             
             <div className="flex items-center justify-between text-xs">
-              <span className="text-[#00ff00]/60 font-mono">{news.source}</span>
-              <div className="flex items-center gap-1 text-[#00ff00]/50 font-mono">
+              <span className="text-primary/60 font-mono">{news.source}</span>
+              <div className="flex items-center gap-1 text-primary/50 font-mono">
                 <ClockIcon className="w-3 h-3" />
                 <span>{news.time}</span>
               </div>
             </div>
 
             <div className="mt-2">
-              <span className="inline-block px-2 py-1 bg-[#00ff00]/10 border border-[#00ff00]/30 rounded text-xs font-mono text-[#00ff00]">
+              <span className="inline-block px-2 py-1 bg-[#00ff00]/10 border border-primary/30 rounded text-xs font-mono text-primary">
                 {news.category}
               </span>
             </div>
@@ -84,7 +84,7 @@ export default function NewsWidget({ id, size, onRemove, onResize }: WidgetProps
         ))}
 
         {size === 'compact' && MOCK_NEWS.length > 3 && (
-          <button className="w-full text-center text-xs text-[#00ff00]/60 hover:text-[#00ff00] font-mono transition-colors">
+          <button className="w-full text-center text-xs text-primary/60 hover:text-primary font-mono transition-colors">
             Ver más noticias →
           </button>
         )}

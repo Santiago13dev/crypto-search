@@ -14,7 +14,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00ff00]/50",
           "disabled:pointer-events-none disabled:opacity-50",
           variant === "default" && "bg-[#00ff00] text-black font-medium hover:bg-[#00ff00]/90",
-          variant === "outline" && "border border-[#00ff00]/20 text-[#00ff00] hover:bg-[#00ff00]/10",
+          variant === "outline" && "border border-primary/20 text-primary hover:bg-[#00ff00]/10",
           className
         )}
         ref={ref}

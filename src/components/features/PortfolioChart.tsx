@@ -9,8 +9,8 @@ interface PortfolioChartProps {
 export default function PortfolioChart({ portfolio, totalInvestment }: PortfolioChartProps) {
   if (portfolio.length === 0) {
     return (
-      <div className="p-8 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none text-center">
-        <p className="text-[#00ff00]/60 font-mono">
+      <div className="p-8 border border-primary/20 bg-background rounded-none text-center">
+        <p className="text-primary/60 font-mono">
           No hay datos para mostrar
         </p>
       </div>
@@ -40,8 +40,8 @@ export default function PortfolioChart({ portfolio, totalInvestment }: Portfolio
   ];
 
   return (
-    <div className="p-6 border border-[#00ff00]/20 bg-[#0a0f1e] rounded-none">
-      <h3 className="text-lg font-bold text-[#00ff00] font-mono mb-4">
+    <div className="p-6 border border-primary/20 bg-background rounded-none">
+      <h3 className="text-lg font-bold text-primary font-mono mb-4">
         {`>`} Distribución del Portafolio
       </h3>
 
@@ -55,21 +55,21 @@ export default function PortfolioChart({ portfolio, totalInvestment }: Portfolio
           >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-mono text-[#00ff00] font-bold">
+                <span className="text-sm font-mono text-primary font-bold">
                   {item.name}
                 </span>
-                <span className="text-xs font-mono text-[#00ff00]/60 uppercase">
+                <span className="text-xs font-mono text-primary/60 uppercase">
                   {item.symbol}
                 </span>
               </div>
               <div className="text-right">
-                <p className="text-sm font-mono text-[#00ff00]">
+                <p className="text-sm font-mono text-primary">
                   ${item.value.toLocaleString(undefined, { 
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2 
                   })}
                 </p>
-                <p className="text-xs font-mono text-[#00ff00]/60">
+                <p className="text-xs font-mono text-primary/60">
                   {item.percentage.toFixed(2)}%
                 </p>
               </div>
@@ -92,12 +92,12 @@ export default function PortfolioChart({ portfolio, totalInvestment }: Portfolio
       </div>
 
       {/* Leyenda de totales */}
-      <div className="mt-6 pt-4 border-t border-[#00ff00]/20">
+      <div className="mt-6 pt-4 border-t border-primary/20">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-mono text-[#00ff00]/60">
+          <span className="text-sm font-mono text-primary/60">
             Total Portfolio
           </span>
-          <span className="text-lg font-bold font-mono text-[#00ff00]">
+          <span className="text-lg font-bold font-mono text-primary">
             ${totalInvestment.toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,

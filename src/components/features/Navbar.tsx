@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   MagnifyingGlassIcon,
@@ -19,69 +20,79 @@ import {
 } from '@heroicons/react/24/outline';
 import { useFavorites } from '@/hooks/useFavorites';
 
-const navItems = [
-  {
-    name: 'Buscar',
-    href: '/',
-    icon: MagnifyingGlassIcon,
-  },
-  {
-    name: 'Dashboard',
-    href: '/dashboard',
-    icon: ViewColumnsIcon,
-  },
-  {
-    name: 'Portafolio',
-    href: '/portfolio',
-    icon: BriefcaseIcon,
-  },
-  {
-    name: 'Calculadora',
-    href: '/converter',
-    icon: CalculatorIcon,
-  },
-  {
-    name: 'Alertas',
-    href: '/alerts',
-    icon: BellAlertIcon,
-  },
-  {
-    name: 'Comparar',
-    href: '/compare',
-    icon: ScaleIcon,
-  },
-  {
-    name: 'Gráficas',
-    href: '/charts',
-    icon: ChartBarIcon,
-  },
-  {
-    name: 'Noticias',
-    href: '/news',
-    icon: NewspaperIcon,
-  },
-];
-
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { favoritesCount } = useFavorites();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const navItems = [
+    {
+      name: t('nav.search'),
+      href: '/',
+      icon: MagnifyingGlassIcon,
+    },
+    {
+      name: t('nav.dashboard'),
+      href: '/dashboard',
+      icon: ViewColumnsIcon,
+    },
+    {
+      name: t('nav.portfolio'),
+      href: '/portfolio',
+      icon: BriefcaseIcon,
+    },
+    {
+      name: t('nav.calculator'),
+      href: '/converter',
+      icon: CalculatorIcon,
+    },
+    {
+      name: t('nav.alerts'),
+      href: '/alerts',
+      icon: BellAlertIcon,
+    },
+    {
+      name: t('nav.compare'),
+      href: '/compare',
+      icon: ScaleIcon,
+    },
+    {
+      name: t('nav.charts'),
+      href: '/charts',
+      icon: ChartBarIcon,
+    },
+    {
+      name: t('nav.news'),
+      href: '/news',
+      icon: NewspaperIcon,
+    },
+  ];
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-[#0a0f1e]/95 backdrop-blur-md border-b border-[#00ff00]/20">
+      <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-primary/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <motion.span
-                className="text-[#00ff00] text-xl font-mono"
+                className="text-primary text-xl font-mono"
                 animate={{ opacity: [1, 0.5, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 {'>'}
               </motion.span>
-              <span className="text-xl font-bold font-mono text-[#00ff00] group-hover:text-[#00ff00]/80 transition-colors">
+              <span className="text-xl font-bold font-mono text-primary group-hover:text-primary/80 transition-colors">
                 CRYPTO TERMINAL
               </span>
             </Link>
@@ -98,8 +109,8 @@ export default function Navbar() {
                     href={item.href}
                     className={`relative px-4 py-2 font-mono text-sm transition-colors ${
                       isActive
-                        ? 'text-[#00ff00]'
-                        : 'text-[#00ff00]/60 hover:text-[#00ff00]'
+                        ? 'text-primary'
+                        : 'text-primary/60 hover:text-primary'
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -111,7 +122,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="navbar-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00ff00]"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -124,10 +135,10 @@ export default function Navbar() {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="ml-2 flex items-center gap-1 px-3 py-1 bg-[#00ff00]/10 border border-[#00ff00]/20 rounded-full"
+                  className="ml-2 flex items-center gap-1 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full"
                 >
-                  <StarIcon className="w-4 h-4 text-[#00ff00]" />
-                  <span className="text-xs font-mono text-[#00ff00] font-bold">
+                  <StarIcon className="w-4 h-4 text-primary" />
+                  <span className="text-xs font-mono text-primary font-bold">
                     {favoritesCount}
                   </span>
                 </motion.div>
@@ -137,7 +148,7 @@ export default function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#00ff00] hover:bg-[#00ff00]/10 transition-colors rounded-none"
+              className="md:hidden p-2 text-primary hover:bg-primary/10 transition-colors rounded-none"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -169,16 +180,16 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-64 bg-[#0a0f1e] border-l border-[#00ff00]/20 z-50 md:hidden"
+              className="fixed right-0 top-0 h-full w-64 bg-background border-l border-primary/20 z-50 md:hidden"
             >
               <div className="p-4">
                 <div className="flex items-center justify-between mb-8">
-                  <span className="text-lg font-bold font-mono text-[#00ff00]">
+                  <span className="text-lg font-bold font-mono text-primary">
                     MENU
                   </span>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 text-[#00ff00] hover:bg-[#00ff00]/10 transition-colors"
+                    className="p-2 text-primary hover:bg-primary/10 transition-colors"
                     aria-label="Close menu"
                   >
                     <XMarkIcon className="w-6 h-6" />
@@ -202,8 +213,8 @@ export default function Navbar() {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-4 py-3 font-mono rounded-none transition-colors ${
                             isActive
-                              ? 'bg-[#00ff00]/20 text-[#00ff00] border-l-2 border-[#00ff00]'
-                              : 'text-[#00ff00]/60 hover:bg-[#00ff00]/10 hover:text-[#00ff00]'
+                              ? 'bg-primary/20 text-primary border-l-2 border-primary'
+                              : 'text-primary/60 hover:bg-primary/10 hover:text-primary'
                           }`}
                         >
                           <Icon className="w-5 h-5" />
@@ -216,11 +227,11 @@ export default function Navbar() {
 
                 {/* Favoritos en mobile */}
                 {favoritesCount > 0 && (
-                  <div className="mt-6 p-4 border border-[#00ff00]/20 bg-[#00ff00]/5 rounded-none">
-                    <div className="flex items-center gap-2 text-[#00ff00] font-mono text-sm">
+                  <div className="mt-6 p-4 border border-primary/20 bg-primary/5 rounded-none">
+                    <div className="flex items-center gap-2 text-primary font-mono text-sm">
                       <StarIcon className="w-5 h-5" />
                       <span>
-                        {favoritesCount} favorito{favoritesCount !== 1 ? 's' : ''}
+                        {favoritesCount} {t('favorites.count', { count: favoritesCount })}
                       </span>
                     </div>
                   </div>
