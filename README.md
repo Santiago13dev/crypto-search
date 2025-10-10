@@ -2,6 +2,8 @@
 
 Terminal retro de criptomonedas con red social integrada para traders y entusiastas del crypto.
 
+<img width="1903" height="862" alt="image" src="https://github.com/user-attachments/assets/14ce2812-b9d2-4b3b-b83d-09e40fd6b89a" />
+
 ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15.4-black.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
