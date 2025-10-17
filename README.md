@@ -1,4 +1,4 @@
-# 🚀 Crypto Terminal
+# 🚀 Crypto Search
 
 Terminal retro de criptomonedas con red social integrada para traders y entusiastas del crypto.
 
